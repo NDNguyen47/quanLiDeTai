@@ -8,7 +8,7 @@ public class App extends Application
 {
     @Override public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("view/example.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/loginPage.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Login");
         stage.setResizable(false);
