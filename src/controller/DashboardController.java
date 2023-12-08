@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-public class Controller {
+public class DashboardController {
 
     @FXML
     private BorderPane borderpane;
