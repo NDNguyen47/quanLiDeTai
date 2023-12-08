@@ -9,7 +9,7 @@ public class DBUtil
 {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection connect = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/db";
+    private static final String URL = "jdbc:mysql://localhost:3306/qlnckh";
 
     public static void connectDB()
     {
