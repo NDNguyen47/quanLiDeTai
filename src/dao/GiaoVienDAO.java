@@ -2,14 +2,12 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.GiaoVien;
 import utils.DBUtil;
-
 
 public class GiaoVienDAO implements DAO<GiaoVien>
 {
@@ -87,10 +85,10 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     // Method insert giáo viên vào CSDL
     @Override public void insert(GiaoVien gv)
     {
-        String query = "INSERT INTO catagory(MAGV, HOTEN, GT, DIACHI, LUONG, MABM) VALUES"
+        String query = "INSERT INTO giaovien(MAGV, HOTEN, GT, DIACHI, LUONG, MABM) VALUES"
                        + "('" + gv.getMaGV() + "','" + gv.getHoTen() + "','" + gv.getGioiTinh() + "','" + gv.getDiaChi()
                        + "'," + gv.getLuong() + ",'" + gv.getMaBM() + "')";
-        System.out.println(query);
+        
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -111,7 +109,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
                        + "MABM='" + gv.getMaBM() + "'"
                        + "WHERE MAGV='" + gv.getMaGV() + "'";
 
-        System.out.println(query);
+        
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -125,7 +123,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     @Override public void delete(String maGV)
     {
         String query = "DELETE FROM giaovien WHERE MAGV='" + maGV + "'";
-        System.out.println(query);
+        
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -135,10 +133,10 @@ public class GiaoVienDAO implements DAO<GiaoVien>
             e.printStackTrace();
         }
     }
-    //Method lấy danh sách SDT theo MAGV
+    // Method lấy danh sách SDT theo MAGV
     public ObservableList<StringProperty> getSDTList(String maGV)
     {
-        String query = "SELECT SDT FROM gv_dt WHERE MAGV = '"+maGV+"'";
+        String query = "SELECT SDT FROM gv_dt WHERE MAGV = '" + maGV + "'";
         ObservableList<StringProperty> sdtList = FXCollections.observableArrayList();
         try
         {
@@ -156,12 +154,12 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         }
         return sdtList;
     }
-    //Method insert SDT mới
+    // Method insert SDT mới
     public void insertSDT(String maGV, String sdt)
     {
         String query = "INSERT INTO gv_dt(MAGV, SDT) VALUES"
                        + "('" + maGV + "','" + sdt + "')";
-        System.out.println(query);
+        
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -171,11 +169,11 @@ public class GiaoVienDAO implements DAO<GiaoVien>
             e.printStackTrace();
         }
     }
-    //Method xóa SDT
+    // Method xóa SDT
     public void deleteSDT(String maGV, String sdt)
     {
-        String query = "DELETE FROM gv_dt WHERE MAGV='" + maGV + "' AND SDT='" + sdt +"'";
-        System.out.println(query);
+        String query = "DELETE FROM gv_dt WHERE MAGV='" + maGV + "' AND SDT='" + sdt + "'";
+        
         try
         {
             DBUtil.ExecuteUpdate(query);
