@@ -28,7 +28,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     // Method lấy danh sách toàn bộ giáo viên
     @Override public ObservableList<GiaoVien> getAll()
     {
-        String query = "SELECT * FROM giaovien";
+        String query = "SELECT * FROM product";
         ObservableList<GiaoVien> giaoVienList = FXCollections.observableArrayList();
         try
         {

@@ -1,8 +1,11 @@
+import dao.GiaoVienDAO;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.GiaoVien;
 
 public class App extends Application
 {
@@ -17,6 +20,18 @@ public class App extends Application
     }
     public static void main(String[] args)
     {
-        launch(args);
+        // launch(args);
+        try
+        {
+            ObservableList<GiaoVien> listGV = GiaoVienDAO.Instance().getAll();
+            for(GiaoVien gv : listGV)
+            {
+                System.out.println(gv.getMaGV() + "," + gv.getHoTen());
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
