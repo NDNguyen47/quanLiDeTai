@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="635.0" prefWidth="835.0" stylesheets="@Dashboard.css" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLGiaoVienController">
+   <children>
+      <AnchorPane layoutX="133.0" layoutY="77.0" prefHeight="626.0" prefWidth="835.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="598.0" prefWidth="798.0">
+               <children>
+                  <TableView layoutX="602.0" layoutY="14.0" prefHeight="146.0" prefWidth="218.0" stylesheets="@Dashboard.css">
+                    <columns>
+                      <TableColumn minWidth="0.0" prefWidth="199.19998168945312" text="SDT" />
+                      <TableColumn minWidth="0.0" prefWidth="0.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <ComboBox layoutX="43.0" layoutY="334.0" prefHeight="30.0" prefWidth="142.0" promptText="Bộ môn phụ trách" stylesheets="@Dashboard.css" />
+                  <Button layoutY="431.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
+                  <Button layoutX="132.0" layoutY="431.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />
+                  <Button layoutX="263.0" layoutY="431.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
+                  <Button layoutX="395.0" layoutY="431.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear" />
+                  <TableView layoutX="-2.0" layoutY="467.0" prefHeight="178.0" prefWidth="822.0" styleClass="left-form-btn" stylesheets="@Dashboard.css">
+                    <columns>
+                      <TableColumn prefWidth="112.00003623962402" text="Mã giáo viên" />
+                      <TableColumn prefWidth="119.19998168945312" text="Số điện thoại " />
+                        <TableColumn prefWidth="101.5999755859375" text="Địa chỉ " />
+                        <TableColumn prefWidth="107.20001220703125" text="Ngày sinh " />
+                        <TableColumn prefWidth="119.99996948242188" text="Lương " />
+                        <TableColumn prefWidth="107.19989013671875" text="Phái" />
+                        <TableColumn prefWidth="132.8001708984375" text="Bộ môn" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="39.0" layoutY="32.0" prefHeight="16.0" prefWidth="82.0" text="Mã giáo viên" />
+                  <TextField layoutX="39.0" layoutY="64.0" prefHeight="30.0" prefWidth="150.0" />
+                  <ComboBox layoutX="222.0" layoutY="62.0" prefHeight="30.0" prefWidth="90.0" promptText="choose" />
+                  <Label layoutX="226.0" layoutY="32.0" prefHeight="16.0" prefWidth="82.0" text="GIới tính" />
+                  <Label layoutX="339.0" layoutY="32.0" prefHeight="16.0" prefWidth="82.0" text="Số điện thoại" />
+                  <TextField layoutX="336.0" layoutY="64.0" />
+                  <Button layoutX="339.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Thêm SDT" />
+                  <TextField layoutX="39.0" layoutY="144.0" prefHeight="30.0" prefWidth="150.0" />
+                  <TextField layoutX="39.0" layoutY="238.0" prefHeight="30.0" prefWidth="150.0" />
+                  <TextField layoutX="223.0" layoutY="334.0" prefHeight="30.0" prefWidth="162.0" />
+                  <Label layoutX="226.0" layoutY="290.0" prefHeight="16.0" prefWidth="82.0" text="Lương" />
+                  <Label layoutX="39.0" layoutY="107.0" prefHeight="16.0" prefWidth="82.0" text="Họ và tên" />
+                  <Label layoutX="39.0" layoutY="202.0" prefHeight="16.0" prefWidth="82.0" text="Địa chỉ" />
+                  <Button layoutX="419.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="66.0" text="Xóa SDT" />
+                  <TableView layoutX="458.0" layoutY="195.0" prefHeight="190.0" prefWidth="362.0">
+                    <columns>
+                      <TableColumn prefWidth="168.00003051757812" text="MADT" />
+                      <TableColumn prefWidth="169.5999755859375" text="TENDT" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
