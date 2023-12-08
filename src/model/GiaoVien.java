@@ -5,12 +5,12 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-// Updated
 public class GiaoVien
 {
     private StringProperty maGV;
     private StringProperty hoTen;
     private StringProperty gioiTinh;
+    private StringProperty ngaySinh;
     private StringProperty diaChi;
     private DoubleProperty luong;
     private StringProperty maBM;
@@ -20,6 +20,7 @@ public class GiaoVien
         this.maGV = new SimpleStringProperty();
         this.hoTen = new SimpleStringProperty();
         this.gioiTinh = new SimpleStringProperty();
+        this.ngaySinh = new SimpleStringProperty();
         this.diaChi = new SimpleStringProperty();
         this.luong = new SimpleDoubleProperty();
         this.maBM = new SimpleStringProperty();
@@ -62,6 +63,19 @@ public class GiaoVien
     public StringProperty gioiTinhProperty()
     {
         return gioiTinh;
+    }
+    // ngaySinh
+    public String getNgaySinh()
+    {
+        return ngaySinh.get();
+    }
+    public void setNgaySinh(String ngaySinh)
+    {
+        this.ngaySinh.set(ngaySinh);
+    }
+    public StringProperty ngaySinhProperty()
+    {
+        return ngaySinh;
     }
     // diachi
     public String getDiaChi()
