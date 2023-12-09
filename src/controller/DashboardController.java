@@ -5,8 +5,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -30,9 +28,6 @@ public class DashboardController {
 
     @FXML
     private Button home_btn;
-
-    @FXML
-    private AnchorPane home_form;
 
     @FXML
     private Button khoa_btn;
