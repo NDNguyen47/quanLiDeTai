@@ -3,7 +3,8 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class SDT {
+public class SDT
+{
     private StringProperty sdt;
     public SDT()
     {

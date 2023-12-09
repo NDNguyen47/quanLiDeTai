@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.GiaoVien;
+import model.SDT;
 import utils.DBUtil;
 
 public class GiaoVienDAO implements DAO<GiaoVien>
@@ -134,16 +135,17 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         }
     }
     // Method lấy danh sách SDT theo MAGV
-    public ObservableList<String> getSDTList(String maGV)
+    public ObservableList<SDT> getSDTList(String maGV)
     {
         String query = "SELECT SDT FROM gv_dt WHERE MAGV = '" + maGV + "'";
-        ObservableList<String> sdtList = FXCollections.observableArrayList();
+        ObservableList<SDT> sdtList = FXCollections.observableArrayList();
         try
         {
             ResultSet resultSet = DBUtil.ExecuteQuery(query);
             while(resultSet.next())
             {
-                String sdt = resultSet.getString(1);
+                SDT sdt =  new SDT();
+                sdt.setSdt(resultSet.getString(1));
                 sdtList.add(sdt);
             }
         }
