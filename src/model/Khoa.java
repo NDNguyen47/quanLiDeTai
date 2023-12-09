@@ -3,7 +3,8 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Khoa {
+public class Khoa
+{
     private StringProperty maKhoa;
     private StringProperty tenKhoa;
     private StringProperty namThanhLap;
