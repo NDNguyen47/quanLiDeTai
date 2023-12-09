@@ -23,7 +23,7 @@ public class TableUtil
                     }
                 }
             }
-            column.setPrefWidth(max + 50.0d);
+            column.setPrefWidth(max + 30.0d);
         });
     }
 }
