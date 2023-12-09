@@ -9,14 +9,14 @@ public class DBUtil
 {
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static Connection connect = null;
-    private static final String URL = "jdbc:mysql://localhost:3306/qlnckh";
+    private static final String URL = "jdbc:mysql://localhost:3307/qlnckh";
 
     public static void connectDB()
     {
         try
         {
             Class.forName(JDBC_DRIVER);
-            connect = DriverManager.getConnection(URL, "root", "dat789qu");
+            connect = DriverManager.getConnection(URL, "root", "123456");
         }
         catch(Exception e)
         {
