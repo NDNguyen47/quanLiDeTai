@@ -1,7 +1,5 @@
 package model;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -12,7 +10,7 @@ public class GiaoVien
     private StringProperty gioiTinh;
     private StringProperty ngaySinh;
     private StringProperty diaChi;
-    private DoubleProperty luong;
+    private StringProperty luong;
     private StringProperty maBM;
 
     public GiaoVien()
@@ -22,7 +20,7 @@ public class GiaoVien
         this.gioiTinh = new SimpleStringProperty();
         this.ngaySinh = new SimpleStringProperty();
         this.diaChi = new SimpleStringProperty();
-        this.luong = new SimpleDoubleProperty();
+        this.luong = new SimpleStringProperty();
         this.maBM = new SimpleStringProperty();
     }
     // maGV
@@ -91,15 +89,15 @@ public class GiaoVien
         return diaChi;
     }
     // luong
-    public double getLuong()
+    public String getLuong()
     {
         return this.luong.get();
     }
-    public void setLuong(double luong)
+    public void setLuong(String luong)
     {
         this.luong.set(luong);
     }
-    public DoubleProperty luongProperty()
+    public StringProperty luongProperty()
     {
         return luong;
     }

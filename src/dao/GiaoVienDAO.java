@@ -50,7 +50,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         gv.setGioiTinh(resultSet.getString("GT"));
         gv.setNgaySinh(resultSet.getString("NGSINH"));
         gv.setDiaChi(resultSet.getString("DIACHI"));
-        gv.setLuong(resultSet.getDouble("LUONG"));
+        gv.setLuong(resultSet.getString("LUONG"));
         gv.setMaBM(resultSet.getString("MABM"));
         return gv;
     }
@@ -183,5 +183,12 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         {
             e.printStackTrace();
         }
+    }
+    // Method kiểm tra SDT có tồn tại chưa
+    public boolean isContainSDT(String maGV, String sdt) throws SQLException
+    {
+        String query = "SELECT * FROM gv_dt WHERE MAGV='" + maGV + "' AND SDT='" + sdt + "'";
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        return resultSet.next();
     }
 }

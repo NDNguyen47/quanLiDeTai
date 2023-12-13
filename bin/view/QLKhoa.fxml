@@ -2,59 +2,79 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="home_form" prefHeight="636.0" prefWidth="843.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLKhoaController">
+<AnchorPane prefHeight="635.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLKhoaController">
    <children>
-      <AnchorPane layoutX="133.0" layoutY="77.0" prefHeight="642.0" prefWidth="851.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutY="7.0" prefHeight="635.0" prefWidth="836.0">
+      <SplitPane dividerPositions="0.5" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <AnchorPane prefHeight="635.0" prefWidth="598.0">
                <children>
-                  <TextField layoutX="56.0" layoutY="61.0" />
-                  <TextField layoutX="56.0" layoutY="122.0" prefHeight="26.0" prefWidth="290.0" />
-                  <TextField layoutX="260.0" layoutY="60.0" prefHeight="26.0" prefWidth="86.0" text="Phòng" />
-                  <TextField layoutX="392.0" layoutY="122.0" prefHeight="26.0" prefWidth="216.0" />
-                  <TextField layoutX="627.0" layoutY="60.0" prefHeight="26.0" prefWidth="162.0" />
-                  <TextField layoutX="392.0" layoutY="61.0" prefHeight="26.0" prefWidth="216.0" />
-                  <Label layoutX="392.0" layoutY="33.0" text="Số điện thoại " />
-                  <Label fx:id="truongbm_label" layoutX="392.0" layoutY="97.0" text="Trưởng bộ môn " />
-                  <Label fx:id="ten_label" layoutX="56.0" layoutY="97.0" text="Tên bộ môn " />
-                  <Label fx:id="ma_label" layoutX="57.0" layoutY="33.0" text="Mã bộ môn " />
-                  <Label layoutX="260.0" layoutY="33.0" text="Phòng" />
-                  <Label fx:id="ngaync_label" layoutX="627.0" layoutY="33.0" text="Ngày nhận chức" />
-                  <Button layoutX="185.0" layoutY="377.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
-                  <Button layoutX="346.0" layoutY="377.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />
-                  <Button layoutX="511.0" layoutY="377.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
-                  <Button layoutX="665.0" layoutY="377.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear" />
-                  <TableView layoutX="28.0" layoutY="413.0" prefHeight="218.0" prefWidth="780.0">
+                  <TextField fx:id="f_khoa_maKh" layoutX="28.0" layoutY="53.0" />
+                  <TextField fx:id="f_khoa_phong" layoutX="217.0" layoutY="53.0" prefHeight="26.0" prefWidth="86.0" />
+                  <TextField fx:id="f_khoa_trgKh" layoutX="29.0" layoutY="236.0" prefHeight="26.0" prefWidth="57.0" />
+                  <TextField fx:id="f_khoa_ngNC" layoutX="291.0" layoutY="171.0" prefHeight="26.0" prefWidth="162.0" />
+                  <TextField fx:id="f_khoa_sdt" layoutX="29.0" layoutY="171.0" prefHeight="26.0" prefWidth="216.0" />
+                  <Label layoutX="29.0" layoutY="153.0" text="Số điện thoại " />
+                  <Label fx:id="truongbm_label" layoutX="29.0" layoutY="218.0" text="Trưởng khoa" />
+                  <Label fx:id="ten_label" layoutX="32.0" layoutY="96.0" text="Tên khoa" />
+                  <Label fx:id="ma_label" layoutX="29.0" layoutY="34.0" text="Mã khoa" />
+                  <Label layoutX="217.0" layoutY="34.0" text="Phòng" />
+                  <Label fx:id="ngaync_label" layoutX="291.0" layoutY="153.0" text="Ngày nhận chức" />
+                  <Button layoutX="10.0" layoutY="352.0" mnemonicParsing="false" onAction="#insertKhoa" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm khoa" />
+                  <Button layoutX="142.0" layoutY="352.0" mnemonicParsing="false" onAction="#updateKhoa" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật khoa" />
+                  <Button layoutX="271.0" layoutY="352.0" mnemonicParsing="false" onAction="#deleteKhoa" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
+                  <Button layoutX="12.0" layoutY="316.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear All" />
+                  <TableView fx:id="tableKhoa" layoutY="390.0" prefHeight="230.0" prefWidth="516.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="388.0">
                     <columns>
-                      <TableColumn prefWidth="104.0000057220459" text="Mã khoa" />
-                      <TableColumn prefWidth="88.79998779296875" text="Tên khoa" />
-                        <TableColumn minWidth="0.0" prefWidth="89.5999755859375" text="Phòng" />
-                        <TableColumn prefWidth="92.00006103515625" text="Năm làm việc" />
-                        <TableColumn minWidth="0.0" prefWidth="93.60003662109375" text="Phòng" />
-                        <TableColumn prefWidth="117.59994506835938" text="Số điện thoại" />
-                        <TableColumn prefWidth="194.4000244140625" text="Trưởng khoa" />
+                      <TableColumn fx:id="khoa_maKh" prefWidth="71.99996566772461" text="Mã khoa" />
+                      <TableColumn fx:id="khoa_tenKh" prefWidth="85.60000610351562" text="Tên khoa" />
+                        <TableColumn fx:id="khoa_namTL" minWidth="0.0" prefWidth="104.00001525878906" text="Năm thành lập" />
+                        <TableColumn fx:id="khoa_phong" prefWidth="69.60000610351562" text="Phòng" />
+                        <TableColumn fx:id="khoa_sdt" prefWidth="126.4000244140625" text="Số điện thoại" />
+                        <TableColumn fx:id="khoa_trgKhoa" prefWidth="86.39999389648438" text="Trưởng khoa" />
+                        <TableColumn fx:id="khoa_ngayNC" prefWidth="116.79998779296875" text="Ngày nhận chức" />
                     </columns>
                   </TableView>
-                  <Button fx:id="choose_btn" layoutX="28.0" layoutY="377.0" mnemonicParsing="false" onAction="#handleChooseButton" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Choose" />
-                  <TableView layoutX="28.0" layoutY="158.0" prefHeight="218.0" prefWidth="780.0">
-                     <columns>
-                        <TableColumn prefWidth="104.0000057220459" text="Mã bộ môn" />
-                        <TableColumn prefWidth="88.79998779296875" text="Tên bộ môn" />
-                        <TableColumn minWidth="0.0" prefWidth="89.5999755859375" text="Phòng" />
-                        <TableColumn prefWidth="92.00006103515625" text="Năm làm việc" />
-                        <TableColumn minWidth="0.0" prefWidth="93.60003662109375" text="Phòng" />
-                        <TableColumn prefWidth="117.59994506835938" text="Số điện thoại" />
-                        <TableColumn prefWidth="194.4000244140625" text="Trưởng bô môn" />
-                     </columns>
-                  </TableView>
+                  <TextField fx:id="f_khoa_namTL" layoutX="292.0" layoutY="113.0" prefHeight="26.0" prefWidth="86.0" />
+                  <Label layoutX="292.0" layoutY="94.0" text="Năm thành lập" />
+                  <TextField fx:id="f_khoa_tenKh" layoutX="29.0" layoutY="113.0" prefHeight="26.0" prefWidth="216.0" />
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
+            <AnchorPane prefHeight="635.0" prefWidth="522.0">
+               <children>
+                  <TableView fx:id="tableBM" layoutY="360.79998779296875" prefHeight="230.0" prefWidth="494.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="388.0">
+                     <columns>
+                        <TableColumn fx:id="bm_maBM" prefWidth="75.99999618530273" text="Mã BM" />
+                        <TableColumn fx:id="bm_tenBM" prefWidth="117.60000610351562" text="Tên bộ môn" />
+                        <TableColumn fx:id="bm_tenBM" minWidth="0.0" prefWidth="89.5999755859375" text="Phòng" />
+                        <TableColumn fx:id="bm_sdt" prefWidth="92.00006103515625" text="Số điện thoại" />
+                        <TableColumn fx:id="bm_trgBM" prefWidth="120.79998779296875" text="Trưởng BM" />
+                        <TableColumn fx:id="bm_ngayNC" prefWidth="114.4000244140625" text="Ngày nhận chức" />
+                     </columns>
+                  </TableView>
+                  <TextField fx:id="f_bm_maBM" layoutX="44.0" layoutY="54.0" />
+                  <TextField fx:id="f_bm_tenBM" layoutX="44.0" layoutY="115.0" prefHeight="26.0" prefWidth="216.0" />
+                  <TextField fx:id="f_bm_phong" layoutX="233.0" layoutY="54.0" prefHeight="26.0" prefWidth="86.0" />
+                  <TextField fx:id="f_bm_trgBM" layoutX="45.0" layoutY="237.0" prefHeight="26.0" prefWidth="57.0" />
+                  <TextField fx:id="f_bm_ngayNC" layoutX="307.0" layoutY="172.0" prefHeight="26.0" prefWidth="162.0" />
+                  <TextField fx:id="f_bm_sdt" layoutX="45.0" layoutY="172.0" prefHeight="26.0" prefWidth="216.0" />
+                  <Label layoutX="45.0" layoutY="154.0" text="Số điện thoại " />
+                  <Label fx:id="truongbm_label1" layoutX="45.0" layoutY="219.0" text="Trưởng bộ môn " />
+                  <Label fx:id="ten_label1" layoutX="48.0" layoutY="97.0" text="Tên bộ môn" />
+                  <Label fx:id="ma_label1" layoutX="45.0" layoutY="35.0" text="Mã bộ môn" />
+                  <Label layoutX="233.0" layoutY="35.0" text="Phòng" />
+                  <Label fx:id="ngaync_label1" layoutX="307.0" layoutY="154.0" text="Ngày nhận chức" />
+                  <Button layoutY="352.0" mnemonicParsing="false" onAction="#insertBM" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm bộ môn" />
+                  <Button layoutX="132.0" layoutY="352.0" mnemonicParsing="false" onAction="#updateBM" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật bộ môn" />
+                  <Button layoutX="261.0" layoutY="352.0" mnemonicParsing="false" onAction="#deleteBM" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
    </children>
 </AnchorPane>
