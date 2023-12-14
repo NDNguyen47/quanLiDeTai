@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.beans.Statement;
 import java.net.URL;
 import java.sql.Connection;
@@ -27,8 +26,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.AlertMsg;
 import model.User;
 
 public class loginPageController implements Initializable {
@@ -118,42 +119,41 @@ public class loginPageController implements Initializable {
 
     @FXML
     private TextField signup_username;
+    private AlertMsg alertMsg;
 
     public void login() {
-        alertMessage alert = new alertMessage();
-        if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
-            alert.errorMessage("Incorrect Username/Password");
-        } else {
-            String selectData = "SELECT * FROM user WHERE"
-                    + "username = ? and password = ? ";
 
-            if(login_selectShowPassword.isSelected()) {
-                login_password.setText(login_showPassword.getText());
-            } else {
-                login_showPassword.setText(login_password.getText());
+        try {
+            if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
+                alertMsg = new AlertMsg();
+                alertMsg.showAndWait();
+            } 
+            else if(!UserDAO.Instance().isPasswordValid(login_username.getText(), login_password.getText()))
+            {
+                alertMsg = new AlertMsg(
+                    AlertType.ERROR, 
+                    "Incorrect username/password!!"
+                );
+                alertMsg.showAndWait();
             }
+            else {
+                // alertMsg = new AlertMsg(
+                //     AlertType.INFORMATION, 
+                //     "Successfully Login!!"
+                // );
 
+                Parent root = FXMLLoader.load(getClass().getResource("../view/DashBoard.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
 
-            try {
-                
-                if (UserDAO.Instance().isUsernameExist(login_username.getText())) {
-                    alert.successMessage("Successfully Login!");
+                stage.setScene(scene);
+                stage.show();
 
-                    Parent root = FXMLLoader.load(getClass().getResource("mainForm.fxml"));
-                    Stage stage = new Stage();
-                    Scene scene = new Scene(root);
+                login_btn.getScene().getWindow().hide();
 
-                    stage.setScene(scene);
-                    stage.show();
-                    
-                    login_btn.getScene().getWindow().hide();
-
-                } else {
-                    alert.errorMessage("Incorrect Username/Password");
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -231,7 +231,7 @@ public class loginPageController implements Initializable {
                     user.setPassword(signup_password.getText());
                     user.setQuestion((String) signup_selectQuestion.getSelectionModel().getSelectedItem());
                     user.setAnswer(signup_answer.getText());
-                    
+
                     Date date = new Date();
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                     user.setDate(String.valueOf(sqlDate));
@@ -276,8 +276,8 @@ public class loginPageController implements Initializable {
                 user.setPassword(changePass_password.getText());
 
                 Date date = new Date();
-                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-                    user.setDate(String.valueOf(sqlDate));
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                user.setDate(String.valueOf(sqlDate));
 
                 alert.successMessage("Succesfully changed Password");
                 signup_form.setVisible(false);

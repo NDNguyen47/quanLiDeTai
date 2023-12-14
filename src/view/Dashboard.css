@@ -1,0 +1,47 @@
+*{
+    -fx-font-family: "Arial";
+}
+
+
+
+
+
+
+.left-form{
+    -fx-background-color:  #a1def5 
+
+}
+
+.modify-btn{
+    -fx-cursor:hand;
+    -fx-font-family: "Arial";
+}
+
+.modify-btn:hover {
+    -fx-background-color: #1593e7 ;
+}
+
+
+.log-out-btn {
+    -fx-cursor:hand;
+
+}
+
+
+.white-bg{
+    -fx-background-color: #fff ;
+    -fx-border-radius: 10px;
+}
+
+.search{
+    -fx-font-family: "Arial";
+}
+
+.search:focus{
+    -fx-border-width: 1.8px;
+
+}
+
+
+
+

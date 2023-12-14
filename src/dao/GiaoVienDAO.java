@@ -2,11 +2,10 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.GiaoVien;
+import model.SDT;
 import utils.DBUtil;
 
 public class GiaoVienDAO implements DAO<GiaoVien>
@@ -51,7 +50,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         gv.setGioiTinh(resultSet.getString("GT"));
         gv.setNgaySinh(resultSet.getString("NGSINH"));
         gv.setDiaChi(resultSet.getString("DIACHI"));
-        gv.setLuong(resultSet.getDouble("LUONG"));
+        gv.setLuong(resultSet.getString("LUONG"));
         gv.setMaBM(resultSet.getString("MABM"));
         return gv;
     }
@@ -76,7 +75,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         return gv;
     }
     // Method kiểm tra giáo viên có tồn tại trong bảng không
-    public boolean containID(String maGV) throws SQLException
+    public boolean isContain(String maGV) throws SQLException
     {
         String query = "SELECT * FROM giaovien WHERE MAGV='" + maGV + "'";
         ResultSet resultSet = DBUtil.ExecuteQuery(query);
@@ -85,10 +84,11 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     // Method insert giáo viên vào CSDL
     @Override public void insert(GiaoVien gv)
     {
-        String query = "INSERT INTO giaovien(MAGV, HOTEN, GT, DIACHI, LUONG, MABM) VALUES"
-                       + "('" + gv.getMaGV() + "','" + gv.getHoTen() + "','" + gv.getGioiTinh() + "','" + gv.getDiaChi()
-                       + "'," + gv.getLuong() + ",'" + gv.getMaBM() + "')";
-        
+        String query = "INSERT INTO giaovien(MAGV, HOTEN, GT, NGSINH, DIACHI, LUONG, MABM) VALUES"
+                       + "('" + gv.getMaGV() + "','" + gv.getHoTen() + "','" + gv.getGioiTinh() + "','"
+                       + gv.getNgaySinh() + "','" + gv.getDiaChi() + "'," + gv.getLuong()
+                       + ",'" + gv.getMaBM() + "')";
+
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -104,12 +104,13 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         String query = "UPDATE giaovien SET "
                        + "HOTEN='" + gv.getHoTen() + "',"
                        + "GT='" + gv.getGioiTinh() + "',"
+                       + "NGSINH='" + gv.getNgaySinh() + "',"
                        + "DIACHI='" + gv.getDiaChi() + "',"
                        + "LUONG=" + gv.getLuong() + ","
                        + "MABM='" + gv.getMaBM() + "'"
                        + "WHERE MAGV='" + gv.getMaGV() + "'";
 
-        
+
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -123,7 +124,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     @Override public void delete(String maGV)
     {
         String query = "DELETE FROM giaovien WHERE MAGV='" + maGV + "'";
-        
+
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -134,17 +135,17 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         }
     }
     // Method lấy danh sách SDT theo MAGV
-    public ObservableList<StringProperty> getSDTList(String maGV)
+    public ObservableList<SDT> getSDTList(String maGV)
     {
         String query = "SELECT SDT FROM gv_dt WHERE MAGV = '" + maGV + "'";
-        ObservableList<StringProperty> sdtList = FXCollections.observableArrayList();
+        ObservableList<SDT> sdtList = FXCollections.observableArrayList();
         try
         {
             ResultSet resultSet = DBUtil.ExecuteQuery(query);
             while(resultSet.next())
             {
-                StringProperty sdt = new SimpleStringProperty();
-                sdt.set(resultSet.getString(1));
+                SDT sdt = new SDT();
+                sdt.setSdt(resultSet.getString(1));
                 sdtList.add(sdt);
             }
         }
@@ -159,7 +160,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     {
         String query = "INSERT INTO gv_dt(MAGV, SDT) VALUES"
                        + "('" + maGV + "','" + sdt + "')";
-        
+
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -173,7 +174,7 @@ public class GiaoVienDAO implements DAO<GiaoVien>
     public void deleteSDT(String maGV, String sdt)
     {
         String query = "DELETE FROM gv_dt WHERE MAGV='" + maGV + "' AND SDT='" + sdt + "'";
-        
+
         try
         {
             DBUtil.ExecuteUpdate(query);
@@ -182,5 +183,12 @@ public class GiaoVienDAO implements DAO<GiaoVien>
         {
             e.printStackTrace();
         }
+    }
+    // Method kiểm tra SDT có tồn tại chưa
+    public boolean isContainSDT(String maGV, String sdt) throws SQLException
+    {
+        String query = "SELECT * FROM gv_dt WHERE MAGV='" + maGV + "' AND SDT='" + sdt + "'";
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        return resultSet.next();
     }
 }

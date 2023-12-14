@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1300.0" stylesheets="@Dashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashboardController">
+   <children>
+      <AnchorPane fx:id="main_form" prefHeight="706.0" prefWidth="1050.0" stylesheets="@Dashboard.css">
+         <children>
+            <BorderPane fx:id="borderpane" layoutX="-14.0" prefHeight="706.0" prefWidth="1108.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-18.0" AnchorPane.topAnchor="0.0">
+               <left>
+                  <AnchorPane prefHeight="594.0" prefWidth="210.0" stylesheets="@Dashboard.css" BorderPane.alignment="CENTER">
+                     <children>
+                        <AnchorPane layoutX="-2.0" prefHeight="660.0" prefWidth="228.0" styleClass="left-form" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Label layoutX="79.0" layoutY="128.0" prefHeight="18.0" prefWidth="70.0" text="Welcome" textFill="#1b1a1a">
+                                 <font>
+                                    <Font name="SansSerif Regular" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Line endX="117.00007629394531" layoutX="106.0" layoutY="206.0" startX="-100.0" />
+                              <Button fx:id="home_btn" alignment="CENTER" layoutX="-1.0" layoutY="225.0" mnemonicParsing="false" onAction="#handleShowHome" prefHeight="43.0" prefWidth="229.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Home">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="giaovien_btn" alignment="CENTER" layoutX="2.0" layoutY="268.0" mnemonicParsing="false" onAction="#handleShowQLGiaoVIen" prefHeight="43.0" prefWidth="226.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Quản lý giáo viên">
+                                 <font>
+                                    <Font name="Tahoma" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="khoa_btn" alignment="CENTER" layoutX="2.0" layoutY="308.0" mnemonicParsing="false" onAction="#handleShowQLKhoa" prefHeight="43.0" prefWidth="226.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Quản lý khoa">
+                                 <font>
+                                    <Font name="Tahoma" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="debug_btn" alignment="CENTER" layoutX="3.0" layoutY="437.0" mnemonicParsing="false" onAction="#handleDebug" prefHeight="43.0" prefWidth="224.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text=" Debug">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="logout_btn" layoutX="34.0" layoutY="599.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="32.0" styleClass="log-out-btn" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0">
+                                 <graphic>
+                                    <FontAwesomeIcon glyphName="SIGN_OUT" size="2em" text="" />
+                                 </graphic></Button>
+                              <Label layoutX="69.0" layoutY="616.0" prefHeight="18.0" prefWidth="63.0" text="Logout" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="62.0">
+                                 <font>
+                                    <Font name="Arial Bold" size="18.0" />
+                                 </font></Label>
+                              <FontAwesomeIcon glyphName="USER" layoutX="79.0" layoutY="100.0" size="7em" />
+                              <Button fx:id="detai_btn" alignment="CENTER" layoutX="-1.0" layoutY="351.0" mnemonicParsing="false" onAction="#handleShowDeTai" prefHeight="43.0" prefWidth="229.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Quản lý đề tài">
+                                 <font>
+                                    <Font name="Tahoma" size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="congviec_btn" alignment="CENTER" layoutX="1.0" layoutY="394.0" mnemonicParsing="false" onAction="#handleShowCongViec" prefHeight="43.0" prefWidth="227.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Quản lý công việc">
+                                 <font>
+                                    <Font name="Tahoma" size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </left>
+               <center>
+                  <AnchorPane prefHeight="670.0" prefWidth="901.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
