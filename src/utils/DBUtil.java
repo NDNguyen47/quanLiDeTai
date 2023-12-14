@@ -16,7 +16,7 @@ public class DBUtil
         try
         {
             Class.forName(JDBC_DRIVER);
-            connect = DriverManager.getConnection(URL, "root", "dat789qu");
+            connect = DriverManager.getConnection(URL, "root", "147369654@Huy");
         }
         catch(Exception e)
         {

@@ -12,11 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import dao.UserDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -24,6 +28,8 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import model.User;
 
 public class loginPageController implements Initializable {
     @FXML
@@ -113,22 +119,6 @@ public class loginPageController implements Initializable {
     @FXML
     private TextField signup_username;
 
-    private Connection connect;
-    private PreparedStatement prepare;
-    private ResultSet result;
-    private Statement statement;
-
-    public Connection connectDB() {
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/(DATABASE NAME)", "root", "");
-            return connect;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     public void login() {
         alertMessage alert = new alertMessage();
         if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
@@ -136,7 +126,6 @@ public class loginPageController implements Initializable {
         } else {
             String selectData = "SELECT * FROM user WHERE"
                     + "username = ? and password = ? ";
-            connect = connectDB();
 
             if(login_selectShowPassword.isSelected()) {
                 login_password.setText(login_showPassword.getText());
@@ -146,14 +135,19 @@ public class loginPageController implements Initializable {
 
 
             try {
-                prepare = connect.prepareStatement(selectData);
-                prepare.setString(1, login_username.getText());
-                prepare.setString(2, login_password.getText());
-
-                result = prepare.executeQuery();
-
-                if (result.next()) {
+                
+                if (UserDAO.Instance().isUsernameExist(login_username.getText())) {
                     alert.successMessage("Successfully Login!");
+
+                    Parent root = FXMLLoader.load(getClass().getResource("mainForm.fxml"));
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+
+                    stage.setScene(scene);
+                    stage.show();
+                    
+                    login_btn.getScene().getWindow().hide();
+
                 } else {
                     alert.errorMessage("Incorrect Username/Password");
                 }
@@ -186,17 +180,9 @@ public class loginPageController implements Initializable {
             String checkData = "SELECT username, question, answer FROM users"
                     + "WHERE username = ? AND question = ? AND answer = ?";
 
-            connect = connectDB();
-
             try {
-                prepare = connect.prepareStatement(checkData);
-                prepare.setString(1, forgot_username.getText());
-                prepare.setString(2, (String) forgot_selectQuestion.getSelectionModel().getSelectedItem());
-                prepare.setString(3, forgot_answer.getText());
 
-                result = prepare.executeQuery();
-
-                if (result.next()) {
+                if (UserDAO.Instance().isUsernameExist(forgot_username.getText())) {
                     signup_form.setVisible(false);
                     login_form.setVisible(false);
                     forgot_form.setVisible(false);
@@ -235,33 +221,22 @@ public class loginPageController implements Initializable {
         } else if (signup_password.getText().length() < 8) {
             alert.errorMessage("Invalid Password, at least 8 characters needed");
         } else {
-            String checkUsername = "SELECT * FROM users WHERE username = '"
-                    + signup_username.getText() + "'";
-            connect = connectDB();
             try {
-                statement = (Statement) connect.createStatement();
-                result = ((java.sql.Statement) statement).executeQuery(checkUsername);
 
-                if (result.next()) {
+                if (UserDAO.Instance().isUsernameExist(signup_username.getText())) {
                     alert.errorMessage(signup_username.getText() + "is already taken");
                 } else {
-                    String inserData = "INSER INTO user"
-                            + "(email, username, password, answer,data)"
-                            + "VALUES(?,?,?,?,?,?)";
-                    prepare = connect.prepareStatement(inserData);
-                    prepare.setString(1, signup_email.getText());
-                    prepare.setString(2, signup_username.getText());
-                    prepare.setString(3, signup_password.getText());
-                    prepare.setString(4, (String) signup_selectQuestion.getSelectionModel().getSelectedItem());
-                    prepare.setString(5, signup_answer.getText());
-
+                    User user = new User();
+                    user.setUsername(signup_username.getText());
+                    user.setPassword(signup_password.getText());
+                    user.setQuestion((String) signup_selectQuestion.getSelectionModel().getSelectedItem());
+                    user.setAnswer(signup_answer.getText());
+                    
                     Date date = new Date();
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    user.setDate(String.valueOf(sqlDate));
 
-                    prepare.setString(6, String.valueOf(sqlDate));
-
-                    prepare.executeUpdate();
-
+                    UserDAO.Instance().insert(user);
                     alert.successMessage("Register Successfully!");
 
                     registerClearFields();
@@ -296,17 +271,14 @@ public class loginPageController implements Initializable {
             String updateData = "UPDATE users SET password = ?, update_date = ?"
                     + "WHERE username = '" + forgot_username.getText() + "'";
 
-            connect = connectDB();
-
             try {
-                prepare = connect.prepareStatement(updateData);
-                prepare.setString(1, changePass_password.getText());
+                User user = new User();
+                user.setPassword(changePass_password.getText());
 
                 Date date = new Date();
-                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    user.setDate(String.valueOf(sqlDate));
 
-                prepare.setString(2, String.valueOf(sqlDate));
-                prepare.executeUpdate();
                 alert.successMessage("Succesfully changed Password");
                 signup_form.setVisible(false);
                 login_form.setVisible(true);

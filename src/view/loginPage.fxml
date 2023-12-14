@@ -16,7 +16,7 @@
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane fx:id="login_form" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="372.0" styleClass="white_bg" stylesheets="@main.css" visible="false">
+            <AnchorPane fx:id="login_form" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="372.0" styleClass="white_bg" stylesheets="@main.css">
                <children>
                   <FontAwesomeIcon fill="#2a827b" glyphName="USER" layoutX="162.0" layoutY="94.0" size="5em" />
                   <Label layoutX="116.0" layoutY="103.0" text="Sign In Account" textFill="#187778">
@@ -80,7 +80,7 @@
                   <TextField fx:id="forgot_username" layoutX="33.0" layoutY="166.0" prefHeight="30.0" prefWidth="302.0" promptText="Username" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="changePass_form" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="372.0" styleClass="white_bg" stylesheets="@main.css">
+            <AnchorPane fx:id="changePass_form" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="372.0" styleClass="white_bg" stylesheets="@main.css" visible="false">
                <children>
                   <FontAwesomeIcon fill="#2a827b" glyphName="LOCK" layoutX="166.0" layoutY="94.0" size="5em" text="" />
                   <Label layoutX="112.0" layoutY="103.0" text="Forgot Password" textFill="#187778">
