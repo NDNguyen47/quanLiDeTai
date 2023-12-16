@@ -8,17 +8,16 @@ import utils.DBUtil;
 
 public class UserDAO
 {
-    private static UserDAO instance;
     private UserDAO()
     {
     }
     public static UserDAO Instance()
     {
-        if(instance == null)
-        {
-            instance = new UserDAO();
-        }
-        return instance;
+        return SingletonHelper.INSTANCE;
+    }
+    private static class SingletonHelper
+    {
+        private static final UserDAO INSTANCE = new UserDAO();
     }
     // Thêm tài khoản
     public void insert(User user)

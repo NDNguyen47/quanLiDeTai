@@ -4,6 +4,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -12,20 +13,23 @@
 
 <AnchorPane prefHeight="635.0" prefWidth="1090.0" stylesheets="@Dashboard.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLGiaoVienController">
    <children>
-      <AnchorPane prefHeight="635.0" prefWidth="835.0" styleClass="white-bg" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="635.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutY="431.0" prefHeight="200.0" prefWidth="835.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="395.0">
+            <AnchorPane layoutY="431.0" prefHeight="253.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="381.4">
                <children>
                   <TableView fx:id="tableGV" onMouseClicked="#gv_select" prefHeight="198.0" prefWidth="846.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="36.0">
                     <columns>
-                      <TableColumn fx:id="gv_maGV" prefWidth="112.00003623962402" text="Mã GV" />
-                      <TableColumn fx:id="gv_hoTen" prefWidth="119.19998168945312" text="Họ tên" />
-                        <TableColumn fx:id="gv_gioiTinh" prefWidth="90.39996337890625" text="Giới tính" />
-                        <TableColumn fx:id="gv_diaCHi" prefWidth="101.5999755859375" text="Địa chỉ " />
-                        <TableColumn fx:id="gv_ngSinh" prefWidth="107.20001220703125" text="Ngày sinh " />
-                        <TableColumn fx:id="gv_luong" prefWidth="119.99996948242188" text="Lương " />
-                        <TableColumn fx:id="gv_boMon" prefWidth="170.4000244140625" text="Bộ môn" />
+                      <TableColumn fx:id="gv_maGV" prefWidth="72.79995441436768" text="Mã GV" />
+                      <TableColumn fx:id="gv_hoTen" prefWidth="230.40003967285156" text="Họ tên" />
+                        <TableColumn fx:id="gv_gioiTinh" prefWidth="79.199951171875" text="Giới tính" />
+                        <TableColumn fx:id="gv_diaCHi" prefWidth="301.5999755859375" text="Địa chỉ " />
+                        <TableColumn fx:id="gv_ngSinh" prefWidth="120.0" text="Ngày sinh " />
+                        <TableColumn fx:id="gv_luong" prefWidth="114.4000244140625" text="Lương " />
+                        <TableColumn fx:id="gv_boMon" prefWidth="128.0" text="Bộ môn" />
                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
                   </TableView>
                   <Button layoutX="6.0" mnemonicParsing="false" onAction="#gv_insert" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
                   <Button layoutX="280.0" mnemonicParsing="false" onAction="#gv_update" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />
@@ -33,47 +37,63 @@
                   <Button layoutX="412.0" mnemonicParsing="false" onAction="#gv_delete" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="9.0" prefHeight="389.0" prefWidth="835.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <TableView fx:id="tableDT" layoutX="597.0" layoutY="186.0" prefHeight="190.0" prefWidth="391.0">
-                    <columns>
-                      <TableColumn fx:id="dt_maDT" prefWidth="77.59994506835938" text="Mã ĐT" />
-                      <TableColumn fx:id="dt_tenDt" prefWidth="312.60003662109375" text="Đề tài tham gia" />
-                    </columns>
-                  </TableView>
-                  <TableView fx:id="tableSDT" layoutX="821.0" layoutY="14.0" prefHeight="158.0" prefWidth="132.0" stylesheets="@Dashboard.css">
-                    <columns>
-                      <TableColumn fx:id="sdt" minWidth="0.0" prefWidth="131.20001220703125" text="Số điện thoại" />
-                    </columns>
-                  </TableView>
-                  <Button layoutX="628.0" layoutY="111.0" mnemonicParsing="false" onAction="#sdt_insert" prefHeight="30.0" prefWidth="82.0" text="Thêm SDT" />
-                  <Label layoutX="635.0" layoutY="45.0" prefHeight="16.0" prefWidth="82.0" text="Số điện thoại" />
-                  <TextField fx:id="f_sdt" layoutX="635.0" layoutY="65.0" prefHeight="30.0" prefWidth="150.0" />
-                  <Button layoutX="717.0" layoutY="111.0" mnemonicParsing="false" onAction="#sdt_delete" prefHeight="30.0" prefWidth="75.0" text="Xóa SDT" />
-                  <Label layoutX="35.0" layoutY="41.0" prefHeight="23.0" prefWidth="82.0" text="Mã giáo viên">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="f_maGV" layoutX="35.0" layoutY="64.0" prefHeight="30.0" prefWidth="150.0" />
-                  <ComboBox fx:id="f_gioiTinh" layoutX="237.0" layoutY="64.0" prefHeight="30.0" prefWidth="90.0" promptText="Choose" />
-                  <Label layoutX="241.0" layoutY="41.0" prefHeight="23.0" prefWidth="82.0" text="Giới tính">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="f_hoTen" layoutX="34.0" layoutY="124.0" prefHeight="30.0" prefWidth="346.0" />
-                  <TextField fx:id="f_diaChi" layoutX="34.0" layoutY="189.0" prefHeight="30.0" prefWidth="346.0" />
-                  <TextField fx:id="f_luong" layoutX="231.0" layoutY="253.0" prefHeight="30.0" prefWidth="142.0" />
-                  <Label layoutX="231.0" layoutY="229.0" prefHeight="23.0" prefWidth="82.0" text="Lương" />
-                  <Label layoutX="35.0" layoutY="101.0" prefHeight="23.0" prefWidth="82.0" text="Họ và tên" />
-                  <Label layoutX="35.0" layoutY="166.0" prefHeight="23.0" prefWidth="82.0" text="Địa chỉ" />
-                  <TextField fx:id="f_boMon" layoutX="35.0" layoutY="319.0" prefHeight="30.0" prefWidth="122.0" />
-                  <Label layoutX="35.0" layoutY="295.0" prefHeight="23.0" prefWidth="122.0" text="Bộ môn phụ trách" />
-                  <Label layoutX="35.0" layoutY="229.0" prefHeight="23.0" prefWidth="82.0" text="Ngày sinh" />
-                  <DatePicker fx:id="f_ngSinh" layoutX="36.0" layoutY="253.0" prefHeight="30.0" prefWidth="162.0" />
-               </children>
-            </AnchorPane>
+            <SplitPane dividerPositions="0.5007806401249024" layoutY="-1.0" prefHeight="382.0" prefWidth="1090.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane layoutX="98.0" layoutY="36.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="36.0">
+                           <children>
+                              <Label layoutX="1.0" prefHeight="23.0" prefWidth="82.0" text="Mã giáo viên">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="f_maGV" layoutX="1.0" layoutY="23.0" prefHeight="30.0" prefWidth="150.0" />
+                              <ComboBox fx:id="f_gioiTinh" layoutX="203.0" layoutY="23.0" prefHeight="30.0" prefWidth="90.0" promptText="Choose" />
+                              <Label layoutX="207.0" prefHeight="23.0" prefWidth="82.0" text="Giới tính">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="f_hoTen" layoutY="83.0" prefHeight="30.0" prefWidth="346.0" />
+                              <TextField fx:id="f_diaChi" layoutY="148.0" prefHeight="30.0" prefWidth="346.0" />
+                              <TextField fx:id="f_luong" layoutX="197.0" layoutY="212.0" prefHeight="30.0" prefWidth="142.0" />
+                              <Label layoutX="197.0" layoutY="188.0" prefHeight="23.0" prefWidth="82.0" text="Lương" />
+                              <Label layoutX="1.0" layoutY="60.0" prefHeight="23.0" prefWidth="82.0" text="Họ và tên" />
+                              <Label layoutX="1.0" layoutY="125.0" prefHeight="23.0" prefWidth="82.0" text="Địa chỉ" />
+                              <TextField fx:id="f_boMon" layoutX="1.0" layoutY="278.0" prefHeight="30.0" prefWidth="122.0" />
+                              <Label layoutX="1.0" layoutY="254.0" prefHeight="23.0" prefWidth="122.0" text="Bộ môn phụ trách" />
+                              <Label layoutX="1.0" layoutY="188.0" prefHeight="23.0" prefWidth="82.0" text="Ngày sinh" />
+                              <DatePicker fx:id="f_ngSinh" layoutX="2.0" layoutY="212.0" prefHeight="30.0" prefWidth="162.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane layoutX="74.0" layoutY="9.0" AnchorPane.bottomAnchor="10.200000000000045" AnchorPane.leftAnchor="74.0" AnchorPane.rightAnchor="75.59999999999997" AnchorPane.topAnchor="9.0">
+                           <children>
+                              <TableView fx:id="tableDT" layoutY="172.0" prefHeight="190.0" prefWidth="391.0">
+                                <columns>
+                                  <TableColumn fx:id="dt_maDT" prefWidth="77.59994506835938" text="Mã ĐT" />
+                                  <TableColumn fx:id="dt_tenDt" prefWidth="312.60003662109375" text="Đề tài tham gia" />
+                                </columns>
+                              </TableView>
+                              <TableView fx:id="tableSDT" layoutX="224.0" prefHeight="158.0" prefWidth="132.0" stylesheets="@Dashboard.css">
+                                <columns>
+                                  <TableColumn fx:id="sdt" minWidth="0.0" prefWidth="131.20001220703125" text="Số điện thoại" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="31.0" layoutY="97.0" mnemonicParsing="false" onAction="#sdt_insert" prefHeight="30.0" prefWidth="82.0" text="Thêm SDT" />
+                              <Label layoutX="38.0" layoutY="31.0" prefHeight="16.0" prefWidth="82.0" text="Số điện thoại" />
+                              <TextField fx:id="f_sdt" layoutX="38.0" layoutY="51.0" prefHeight="30.0" prefWidth="150.0" />
+                              <Button layoutX="120.0" layoutY="97.0" mnemonicParsing="false" onAction="#sdt_delete" prefHeight="30.0" prefWidth="75.0" text="Xóa SDT" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
          </children>
       </AnchorPane>
    </children>

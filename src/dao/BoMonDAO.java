@@ -2,42 +2,34 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.BoMon;
 import utils.DBUtil;
 
+
 public class BoMonDAO implements DAO<BoMon>
 {
-    private static BoMonDAO instance;
     private BoMonDAO()
     {
     }
     public static BoMonDAO Instance()
     {
-        if(instance == null)
-        {
-            instance = new BoMonDAO();
-        }
-        return instance;
+        return SingletonHelper.INSTANCE;
     }
-    // Method lấy danh sách toàn bộ boMon
-    @Override public ObservableList<BoMon> getAll()
+    private static class SingletonHelper
+    {
+        private static final BoMonDAO INSTANCE = new BoMonDAO();
+    }
+
+    @Override public ObservableList<BoMon> getAll() throws SQLException
     {
         String query = "SELECT * FROM bomon";
         ObservableList<BoMon> boMonList = FXCollections.observableArrayList();
-        try
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        while(resultSet.next())
         {
-            ResultSet resultSet = DBUtil.ExecuteQuery(query);
-            while(resultSet.next())
-            {
-                boMonList.add(getFromResultSet(resultSet));
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            boMonList.add(getFromResultSet(resultSet));
         }
         return boMonList;
     }
@@ -54,52 +46,49 @@ public class BoMonDAO implements DAO<BoMon>
         bomon.setNgayNhanChuc(resultSet.getString("NGAYNC"));
         return bomon;
     }
-    // Method lấy bomon theo MABM
-    @Override public BoMon get(String maBM)
+
+    public ObservableList<BoMon> getFromMaKhoa(String maKhoa) throws SQLException
     {
-        String query = "SELECT * FROM bomon WHERE MABM='" + maBM + "'";
-        BoMon bomon = null;
-        try
+        String query = "SELECT * FROM bomon WHERE MAKHOA = '" + maKhoa + "'";
+        ObservableList<BoMon> boMonList = FXCollections.observableArrayList();
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        while(resultSet.next())
         {
-            ResultSet resultSet = DBUtil.ExecuteQuery(query);
-            if(resultSet != null)
-            {
-                resultSet.next();
-                bomon = getFromResultSet(resultSet);
-            }
+            boMonList.add(getFromResultSet(resultSet));
         }
-        catch(Exception e)
+        return boMonList;
+    }
+
+    @Override public BoMon get(String... id) throws SQLException
+    {
+        String query = "SELECT * FROM bomon WHERE MABM='" + id[0] + "'";
+        BoMon bomon = null;
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        if(resultSet != null)
         {
-            e.printStackTrace();
+            resultSet.next();
+            bomon = getFromResultSet(resultSet);
         }
         return bomon;
     }
-    // Method kiểm tra bomon có tồn tại trong bảng không
-    public boolean isContain(String maBM) throws SQLException
+
+    @Override public boolean isContain(String... id) throws SQLException
     {
-        String query = "SELECT * FROM bomon WHERE MABM='" + maBM + "'";
+        String query = "SELECT * FROM bomon WHERE MABM='" + id[0] + "'";
         ResultSet resultSet = DBUtil.ExecuteQuery(query);
         return resultSet.next();
     }
-    // Method insert bomon vào CSDL
-    @Override public void insert(BoMon bomon)
+
+    @Override public void insert(BoMon bomon) throws SQLException
     {
         String query = "INSERT INTO bomon(MABM, TENBM, MAKHOA, PHONG, SDT, TRGBM, NGAYNC) VALUES"
                        + "('" + bomon.getMaBM() + "','" + bomon.getTenBM() + "','" + bomon.getMaKhoa() + "','"
-                       + bomon.getPhong() + "','" + bomon.getSdt() + "'," + bomon.getTruongBM() + ",'"
+                       + bomon.getPhong() + "','" + bomon.getSdt() + "','" + bomon.getTruongBM() + "','"
                        + bomon.getNgayNhanChuc() + "')";
-
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        DBUtil.ExecuteUpdate(query);
     }
-    // Method update thông tin bomon
-    @Override public void update(BoMon bomon)
+
+    @Override public void update(BoMon bomon) throws SQLException
     {
         String query = "UPDATE bomon SET "
                        + "TENBM='" + bomon.getTenBM() + "',"
@@ -109,29 +98,12 @@ public class BoMonDAO implements DAO<BoMon>
                        + "TRGBM='" + bomon.getTruongBM() + "',"
                        + "NGAYNC='" + bomon.getNgayNhanChuc() + "'"
                        + "WHERE MABM='" + bomon.getMaKhoa() + "'";
-
-
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        DBUtil.ExecuteUpdate(query);
     }
-    // Method xóa bomon khỏi CSDL
-    @Override public void delete(String maBM)
-    {
-        String query = "DELETE FROM bomon WHERE MABM='" + maBM + "'";
 
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+    @Override public void delete(String... id)throws SQLException
+    {
+        String query = "DELETE FROM bomon WHERE MABM='" + id[0] + "'";
+        DBUtil.ExecuteUpdate(query);
     }
 }
