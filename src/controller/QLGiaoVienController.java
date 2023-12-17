@@ -39,7 +39,7 @@ public class QLGiaoVienController implements Initializable
 
     @FXML private TextField f_diaChi;
 
-    @FXML private ComboBox<?> f_gioiTinh;
+    @FXML private ComboBox<String> f_gioiTinh;
 
     @FXML private TextField f_hoTen;
 
@@ -122,9 +122,14 @@ public class QLGiaoVienController implements Initializable
         }
     }
 
-    @FXML void gv_clear(ActionEvent event)
+    @FXML void gv_clear()
     {
         clearAllField();
+        tableGV.getSelectionModel().clearSelection();
+        selectedGV = null;
+        tableSDT.getItems().clear();
+        tableDT.getItems().clear();
+
     }
 
     @FXML void gv_delete(ActionEvent event)
@@ -133,9 +138,8 @@ public class QLGiaoVienController implements Initializable
         {
             if(f_maGV.getText().isEmpty())
             {
-                alert = new AlertMsg(AlertType.ERROR, "Please fill MaGV");
+                alert = new AlertMsg(AlertType.ERROR, "Please fill 'Mã giáo viên'");
                 alert.showAndWait();
-                return;
             }
             else if(!GiaoVienDAO.Instance().isContain(f_maGV.getText()))
             {
@@ -146,7 +150,7 @@ public class QLGiaoVienController implements Initializable
             {
                 GiaoVienDAO.Instance().delete(f_maGV.getText());
                 showAllGV();
-                clearAllField();
+                gv_clear();
             }
         }
         catch(Exception e)
@@ -188,7 +192,7 @@ public class QLGiaoVienController implements Initializable
                 alert = new AlertMsg(AlertType.INFORMATION, "Successfully Added!");
                 alert.showAndWait();
                 showAllGV();
-                clearAllField();
+                gv_clear();
             }
         }
         catch(Exception e)
@@ -208,7 +212,6 @@ public class QLGiaoVienController implements Initializable
             {
                 alert = new AlertMsg();
                 alert.showAndWait();
-                return;
             }
             else if(!GiaoVienDAO.Instance().isContain(f_maGV.getText()))
             {
@@ -230,7 +233,6 @@ public class QLGiaoVienController implements Initializable
                 alert = new AlertMsg(AlertType.INFORMATION, "Successfully Added!");
                 alert.showAndWait();
                 showAllGV();
-                clearAllField();
             }
         }
         catch(Exception e)
@@ -243,7 +245,7 @@ public class QLGiaoVienController implements Initializable
     {
         try
         {
-            if(maGV.isEmpty() || !GiaoVienDAO.Instance().isContain(maGV))
+            if(maGV.isEmpty())
             {
                 return;
             }
@@ -264,7 +266,7 @@ public class QLGiaoVienController implements Initializable
     {
         try
         {
-            if(maGV.isEmpty() || !GiaoVienDAO.Instance().isContain(maGV))
+            if(maGV.isEmpty())
             {
                 return;
             }
@@ -359,7 +361,7 @@ public class QLGiaoVienController implements Initializable
     {
         gioiTinhSelect.add("Nam");
         gioiTinhSelect.add("Nữ");
-        ObservableList listData = FXCollections.observableArrayList(gioiTinhSelect);
+        ObservableList<String> listData = FXCollections.observableArrayList(gioiTinhSelect);
         f_gioiTinh.setItems(listData);
     }
 

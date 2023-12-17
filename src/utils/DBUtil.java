@@ -54,7 +54,8 @@ public class DBUtil
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw e;
         }
         finally
         {
@@ -80,9 +81,10 @@ public class DBUtil
             statement = connect.createStatement();
             statement.executeUpdate(query);
         }
-        catch(Exception e)
+        catch(SQLException e)
         {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
+            throw e;
         }
         finally
         {

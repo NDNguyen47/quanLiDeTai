@@ -2,41 +2,34 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.DeTai;
 import utils.DBUtil;
 
-public class DeTaiDAO implements DAO<DeTai> {
-    private static DeTaiDAO instance;
+
+public class DeTaiDAO implements DAO<DeTai>
+{
     private DeTaiDAO()
     {
     }
     public static DeTaiDAO Instance()
     {
-        if(instance == null)
-        {
-            instance = new DeTaiDAO();
-        }
-        return instance;
+        return SingletonHelper.INSTANCE;
     }
-    // Method lấy danh sách toàn bộ đề tài
-    @Override public ObservableList<DeTai> getAll()
+    private static class SingletonHelper
+    {
+        private static final DeTaiDAO INSTANCE = new DeTaiDAO();
+    }
+
+    @Override public ObservableList<DeTai> getAll() throws SQLException
     {
         String query = "SELECT * FROM detai";
         ObservableList<DeTai> deTaiList = FXCollections.observableArrayList();
-        try
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        while(resultSet.next())
         {
-            ResultSet resultSet = DBUtil.ExecuteQuery(query);
-            while(resultSet.next())
-            {
-                deTaiList.add(getFromResultSet(resultSet));
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            deTaiList.add(getFromResultSet(resultSet));
         }
         return deTaiList;
     }
@@ -53,78 +46,55 @@ public class DeTaiDAO implements DAO<DeTai> {
         dt.setMaCD(resultSet.getString("MACD"));
         return dt;
     }
-    // Method lấy đề tài theo MADT
-    public ObservableList<DeTai> getFromMaGV(String maGV)
+
+    public ObservableList<DeTai> getFromMaGV(String maGV) throws SQLException
     {
         String query = "SELECT d.MADT, d.TENDT "
-                        + "FROM detai d "
-                        + "JOIN thamgiadt t USING(MADT) "
-                        + "WHERE MAGV = '" + maGV + "' "
-                        + "GROUP BY d.MADT, d.TENDT";
+                       + "FROM detai d "
+                       + "JOIN thamgiadt t USING(MADT) "
+                       + "WHERE MAGV = '" + maGV + "' "
+                       + "GROUP BY d.MADT, d.TENDT";
         ObservableList<DeTai> deTaiList = FXCollections.observableArrayList();
-        try
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        while(resultSet.next())
         {
-            ResultSet resultSet = DBUtil.ExecuteQuery(query);
-            while(resultSet.next())
-            {
-                DeTai dt = new DeTai();
-                dt.setMaDT(resultSet.getString("MADT"));
-                dt.setTenDT(resultSet.getString("TENDT"));
-                deTaiList.add(dt);
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            DeTai dt = new DeTai();
+            dt.setMaDT(resultSet.getString("MADT"));
+            dt.setTenDT(resultSet.getString("TENDT"));
+            deTaiList.add(dt);
         }
         return deTaiList;
     }
 
-    @Override public DeTai get(String maDT)
+    @Override public DeTai get(String... id) throws SQLException
     {
-        String query = "SELECT * FROM detai WHERE MADT='" + maDT + "'";
+        String query = "SELECT * FROM detai WHERE MADT='" + id[0] + "'";
         DeTai dt = null;
-        try
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        if(resultSet != null)
         {
-            ResultSet resultSet = DBUtil.ExecuteQuery(query);
-            if(resultSet != null)
-            {
-                resultSet.next();
-                dt = getFromResultSet(resultSet);
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+            resultSet.next();
+            dt = getFromResultSet(resultSet);
         }
         return dt;
     }
-    // Method kiểm tra đề tài có tồn tại trong bảng không
-    public boolean isContain(String maDT) throws SQLException
+
+    @Override public boolean isContain(String... id) throws SQLException
     {
-        String query = "SELECT * FROM detai WHERE MADT='" + maDT + "'";
+        String query = "SELECT * FROM detai WHERE MADT='" + id[0] + "'";
         ResultSet resultSet = DBUtil.ExecuteQuery(query);
         return resultSet.next();
     }
-    // Method insert đề tài vào CSDL
-    @Override public void insert(DeTai dt)
+
+    @Override public void insert(DeTai dt) throws SQLException
     {
         String query = "INSERT INTO detai(MADT, TENDT, CAPQL, KINHPHI, NGAYBD, NGAYKT, MACD) VALUES"
-                       + "('" + dt.getMaDT() + "','" + dt.getTenDT() + "','" + dt.getCapQL() + "',"
-                       + dt.getKinhPhi() + ",'" + dt.getNgayBD() + "','" + dt.getNgayKT()
-                       + "'','" + dt.getMaCD() + "')";
-
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+                       + "('" + dt.getMaDT() + "','" + dt.getTenDT() + "','" + dt.getCapQL() + "'," + dt.getKinhPhi()
+                       + ",'" + dt.getNgayBD() + "','" + dt.getNgayKT() + "','" + dt.getMaCD() + "')";
+        DBUtil.ExecuteUpdate(query);
     }
-    // Method update thông tin đề tài
-    @Override public void update(DeTai dt)
+
+    @Override public void update(DeTai dt) throws SQLException
     {
         String query = "UPDATE detai SET "
                        + "TENDT='" + dt.getTenDT() + "',"
@@ -134,29 +104,12 @@ public class DeTaiDAO implements DAO<DeTai> {
                        + "NGAYKT='" + dt.getNgayKT() + "',"
                        + "MACD='" + dt.getMaCD() + "'"
                        + "WHERE MADT='" + dt.getMaDT() + "'";
-
-
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        DBUtil.ExecuteUpdate(query);
     }
-    // Method xóa đề tài khỏi CSDL
-    @Override public void delete(String maDT)
-    {
-        String query = "DELETE FROM detai WHERE MADT='" + maDT + "'";
 
-        try
-        {
-            DBUtil.ExecuteUpdate(query);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+    @Override public void delete(String... id)throws SQLException
+    {
+        String query = "DELETE FROM detai WHERE MADT='" + id[0] + "'";
+        DBUtil.ExecuteUpdate(query);
     }
 }

@@ -1,61 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="home_form" prefHeight="635.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/20.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLDeTaiController">
+<AnchorPane fx:id="home_form" prefHeight="635.0" prefWidth="1090.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.QLDeTaiController">
    <children>
-      <AnchorPane layoutX="133.0" layoutY="77.0" prefHeight="585.0" prefWidth="846.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="133.0" layoutY="77.0" prefHeight="585.0" prefWidth="846.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="635.0" prefWidth="836.0" styleClass="white-bg">
+            <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="381.4">
                <children>
-                  <TextField fx:id="maDetai_QLDT" layoutX="56.0" layoutY="50.0" />
-                  <Label layoutX="56.0" layoutY="21.0" text="Mã đề tài" />
-                  <Label layoutX="273.0" layoutY="21.0" text="Giới tính" />
-                  <TextField fx:id="tenDT_QLDT" layoutX="55.0" layoutY="120.0" prefHeight="26.0" prefWidth="364.0" />
-                  <Label layoutX="55.0" layoutY="93.0" text="Tên đề tài" />
-                  <TextField fx:id="maChuDe_QLDT" layoutX="519.0" layoutY="50.0" />
-                  <Label layoutX="519.0" layoutY="20.0" prefHeight="18.0" prefWidth="62.0" text="Mã chủ đề" />
-                  <TextField layoutX="519.0" layoutY="120.0" />
-                  <Label layoutX="521.0" layoutY="93.0" text="Tên chủ đề" />
-                  <TextField fx:id="capQL_QLDT" layoutX="56.0" layoutY="187.0" />
-                  <Label layoutX="58.0" layoutY="162.0" text="Cấp quản lý " />
-                  <TextField fx:id="kinhPhi_QLDT" layoutX="273.0" layoutY="187.0" />
-                  <Label layoutX="274.0" layoutY="162.0" text="Kinh phí" />
-                  <Label layoutX="55.0" layoutY="235.0" text="Ngày bắt đầu" />
-                  <Label layoutX="273.0" layoutY="235.0" text="Ngày kết thúc" />
-                  <ComboBox fx:id="gender_QLDT" layoutX="274.0" layoutY="50.0" prefWidth="150.0" promptText="choose" />
-                  <DatePicker fx:id="startDate_QLDT" layoutX="52.0" layoutY="263.0" prefHeight="26.0" prefWidth="150.0" />
-                  <DatePicker fx:id="endDate_QLDT" layoutX="274.0" layoutY="263.0" prefHeight="26.0" prefWidth="150.0" />
-                  <Button fx:id="them_btn_QLDT" layoutX="5.0" layoutY="385.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
-                  <Button fx:id="update_btn_QLDT" layoutX="137.0" layoutY="385.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />
-                  <Button fx:id="delete_btn_QLDT" layoutX="268.0" layoutY="385.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
-                  <Button fx:id="clear_btn_QLDT" layoutX="400.0" layoutY="385.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="142.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear" />
-                  <TableView layoutX="8.0" layoutY="421.0" prefHeight="200.0" prefWidth="821.0">
+                  <Button layoutX="6.0" mnemonicParsing="false" onAction="#dt_insert" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
+                  <Button layoutX="138.0" mnemonicParsing="false" onAction="#dt_update" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />
+                  <Button layoutX="270.0" mnemonicParsing="false" onAction="#dt_delete" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Xóa" />
+                  <Button layoutX="402.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="36.0" prefWidth="142.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear" />
+                  <TableView fx:id="tableDT" layoutX="3.0" layoutY="36.0" onMouseClicked="#dt_select" prefHeight="200.0" prefWidth="821.0" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="36.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="MADT" />
-                      <TableColumn prefWidth="142.4000244140625" text="TENDT" />
-                        <TableColumn prefWidth="109.59996032714844" text="CAPQL" />
-                        <TableColumn prefWidth="114.4000244140625" text="KINH" />
-                        <TableColumn prefWidth="124.0" text="NGAYBD" />
-                        <TableColumn prefWidth="136.0" text="NGAYKT" />
-                        <TableColumn prefWidth="120.0" text="MACD" />
-                    </columns>
-                  </TableView>
-                  <TableView layoutX="519.0" layoutY="163.0" prefHeight="200.0" prefWidth="294.0">
-                    <columns>
-                      <TableColumn prefWidth="151.99993896484375" text="MACD" />
-                      <TableColumn prefWidth="141.60003662109375" text="TENCD" />
+                      <TableColumn fx:id="dt_maDT" prefWidth="65.59997272491455" text="Mã đề tài" />
+                      <TableColumn fx:id="dt_tenDT" prefWidth="448.8000030517578" text="Tên đề tài" />
+                        <TableColumn fx:id="dt_capQL" prefWidth="116.79998779296875" text="Cấp quản lý" />
+                        <TableColumn fx:id="dt_kinhPhi" prefWidth="113.5999755859375" text="Kinh phí" />
+                        <TableColumn fx:id="dt_ngayBD" prefWidth="108.0" text="Ngày bắt đầu" />
+                        <TableColumn fx:id="dt_ngayKT" prefWidth="125.60003662109375" text="Ngày kết thúc" />
+                        <TableColumn fx:id="dt_maCD" prefWidth="96.800048828125" text="Mã CĐ" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
+            <SplitPane dividerPositions="0.5" layoutX="106.0" layoutY="36.0" prefHeight="335.0" prefWidth="1090.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <items>
+                  <AnchorPane>
+                     <children>
+                        <AnchorPane layoutX="84.0" layoutY="48.0" AnchorPane.bottomAnchor="64.80000000000001" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="84.80000000000001" AnchorPane.topAnchor="48.0">
+                           <children>
+                              <TextField fx:id="f_maDT" layoutX="4.0" layoutY="29.0" prefHeight="26.0" prefWidth="66.0" />
+                              <Label layoutX="4.0" layoutY="9.0" text="Mã đề tài">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="f_tenDT" layoutX="3.0" layoutY="99.0" prefHeight="26.0" prefWidth="374.0" />
+                              <TextField fx:id="f_capQL" layoutX="4.0" layoutY="166.0" prefHeight="26.0" prefWidth="150.0" />
+                              <TextField fx:id="f_kinhPhi" layoutX="221.0" layoutY="166.0" />
+                              <DatePicker fx:id="f_ngayBD" layoutX="5.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" />
+                              <DatePicker fx:id="f_ngayKT" layoutX="222.0" layoutY="242.0" prefHeight="26.0" prefWidth="150.0" />
+                              <Label layoutX="4.0" layoutY="81.0" text="Tên đề tài">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="4.0" layoutY="148.0" text="Cấp quản lý">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="221.0" layoutY="148.0" text="Kinh phí">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="4.0" layoutY="224.0" text="Ngày bắt đầu">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="221.0" layoutY="224.0" text="Ngày kết thúc">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane>
+                     <children>
+                        <TextField fx:id="f_maCD" layoutX="21.0" layoutY="77.0" prefHeight="26.0" prefWidth="66.0" />
+                        <TextField fx:id="f_tenCD" layoutX="21.0" layoutY="148.0" prefHeight="26.0" prefWidth="297.0" />
+                        <TableView fx:id="tableCD" layoutX="2.0" layoutY="211.0" onMouseClicked="#cd_select" prefHeight="171.0" prefWidth="501.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="211.0">
+                          <columns>
+                            <TableColumn fx:id="cd_maCD" prefWidth="151.99993896484375" text="Mã CĐ" />
+                            <TableColumn fx:id="cd_tenCD" prefWidth="141.60003662109375" text="Tên chủ đề" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="21.0" layoutY="59.0" text="Mã chủ đề">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="19.0" layoutY="130.0" text="Tên chủ đề">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="19.0" layoutY="185.0" mnemonicParsing="false" onAction="#cd_insert" text="Thêm chủ đề" />
+                        <Button layoutX="104.0" layoutY="185.0" mnemonicParsing="false" onAction="#cd_delete" text="Xóa chủ đề" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
          </children>
       </AnchorPane>
    </children>

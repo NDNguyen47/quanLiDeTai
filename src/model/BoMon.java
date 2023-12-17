@@ -1,5 +1,6 @@
 package model;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class BoMon
@@ -11,6 +12,16 @@ public class BoMon
     private StringProperty sdt;
     private StringProperty truongBM;
     private StringProperty ngayNhanChuc;
+    public BoMon()
+    {
+        maBM = new SimpleStringProperty();
+        tenBM = new SimpleStringProperty();
+        maKhoa = new SimpleStringProperty();
+        phong = new SimpleStringProperty();
+        sdt = new SimpleStringProperty();
+        truongBM = new SimpleStringProperty();
+        ngayNhanChuc = new SimpleStringProperty();
+    }
     // maBM
     public String getMaBM()
     {
