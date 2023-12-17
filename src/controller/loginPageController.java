@@ -127,20 +127,12 @@ public class loginPageController implements Initializable {
             if (login_username.getText().isEmpty() || login_password.getText().isEmpty()) {
                 alertMsg = new AlertMsg();
                 alertMsg.showAndWait();
-            } 
-            else if(!UserDAO.Instance().isPasswordValid(login_username.getText(), login_password.getText()))
-            {
+            } else if (!UserDAO.Instance().isPasswordValid(login_username.getText(), login_password.getText())) {
                 alertMsg = new AlertMsg(
-                    AlertType.ERROR, 
-                    "Incorrect username/password!!"
-                );
+                        AlertType.ERROR,
+                        "Incorrect username/password!!");
                 alertMsg.showAndWait();
-            }
-            else {
-                // alertMsg = new AlertMsg(
-                //     AlertType.INFORMATION, 
-                //     "Successfully Login!!"
-                // );
+            } else {
 
                 Parent root = FXMLLoader.load(getClass().getResource("../view/DashBoard.fxml"));
                 Stage stage = new Stage();
@@ -170,30 +162,29 @@ public class loginPageController implements Initializable {
     }
 
     public void forgotPassword() {
-        alertMessage alert = new alertMessage();
 
-        if (forgot_username.getText().isEmpty()
-                || forgot_selectQuestion.getSelectionModel().getSelectedItem() == null
-                || forgot_answer.getText().isEmpty()) {
-            alert.errorMessage("please fill all blank fields");
-        } else {
-            String checkData = "SELECT username, question, answer FROM users"
-                    + "WHERE username = ? AND question = ? AND answer = ?";
-
-            try {
-
-                if (UserDAO.Instance().isUsernameExist(forgot_username.getText())) {
-                    signup_form.setVisible(false);
-                    login_form.setVisible(false);
-                    forgot_form.setVisible(false);
-                    changePass_form.setVisible(true);
-                } else {
-                    alert.errorMessage("Incorrect information");
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
+        try {
+            if (forgot_username.getText().isEmpty()
+                    || forgot_selectQuestion.getSelectionModel().getSelectedItem() == null
+                    || forgot_answer.getText().isEmpty()) {
+                alertMsg = new AlertMsg(
+                        AlertType.ERROR,
+                        "please fill all blank fields");
+                alertMsg.showAndWait();
+            } else if (UserDAO.Instance().isUsernameExist(forgot_username.getText())) {
+                signup_form.setVisible(false);
+                login_form.setVisible(false);
+                forgot_form.setVisible(false);
+                changePass_form.setVisible(true);
+            } else {
+                alertMsg = new AlertMsg(
+                        AlertType.INFORMATION,
+                        "Incorrect information");
+                alertMsg.showAndWait();
             }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -209,22 +200,33 @@ public class loginPageController implements Initializable {
 
     public void register() {
 
-        alertMessage alert = new alertMessage();
-
         if (signup_email.getText().isEmpty() || signup_username.getText().isEmpty()
                 || signup_password.getText().isEmpty() || signup_cPassword.getText().isEmpty()
                 || signup_selectQuestion.getSelectionModel().getSelectedItem() == null
                 || signup_answer.getText().isEmpty()) {
-            alert.errorMessage("All fields are necessary to be filled");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "All fields are necessary to be filled");
+            alertMsg.showAndWait();
         } else if (signup_password.getText() == signup_cPassword.getText()) {
-            alert.errorMessage("Password does not match");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "Password does not match");
+            alertMsg.showAndWait();
         } else if (signup_password.getText().length() < 8) {
-            alert.errorMessage("Invalid Password, at least 8 characters needed");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "Invalid Password, at least 8 characters needed");
+            alertMsg.showAndWait();
         } else {
             try {
 
                 if (UserDAO.Instance().isUsernameExist(signup_username.getText())) {
-                    alert.errorMessage(signup_username.getText() + "is already taken");
+                    alertMsg = new AlertMsg(
+                            AlertType.ERROR,
+                            signup_username.getText() +
+                                    " is already taken");
+                    alertMsg.showAndWait();
                 } else {
                     User user = new User();
                     user.setUsername(signup_username.getText());
@@ -237,7 +239,10 @@ public class loginPageController implements Initializable {
                     user.setDate(String.valueOf(sqlDate));
 
                     UserDAO.Instance().insert(user);
-                    alert.successMessage("Register Successfully!");
+                    alertMsg = new AlertMsg(
+                            AlertType.CONFIRMATION,
+                            "Register Successfully!");
+                    alertMsg.showAndWait();
 
                     registerClearFields();
 
@@ -259,17 +264,23 @@ public class loginPageController implements Initializable {
     }
 
     public void changPassword() {
-        alertMessage alert = new alertMessage();
 
         if (changePass_password.getText().isEmpty() || changePass_cPassword.getText().isEmpty()) {
-            alert.errorMessage("please fill all bank fields");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "please fill all bank fields");
+            alertMsg.showAndWait();
         } else if (!changePass_password.getText().equals(changePass_cPassword.getText())) {
-            alert.errorMessage("Password does not match");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "Password does not match");
+            alertMsg.showAndWait();
         } else if (changePass_password.getText().length() < 0) {
-            alert.errorMessage("Invalid Password, at least 8 characters needed");
+            alertMsg = new AlertMsg(
+                    AlertType.ERROR,
+                    "Invalid Password, at least 8 characters needed");
+            alertMsg.showAndWait();
         } else {
-            String updateData = "UPDATE users SET password = ?, update_date = ?"
-                    + "WHERE username = '" + forgot_username.getText() + "'";
 
             try {
                 User user = new User();
@@ -279,7 +290,10 @@ public class loginPageController implements Initializable {
                 java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                 user.setDate(String.valueOf(sqlDate));
 
-                alert.successMessage("Succesfully changed Password");
+                alertMsg = new AlertMsg(
+                        AlertType.CONFIRMATION,
+                        "Succesfully changed Password");
+                alertMsg.showAndWait();
                 signup_form.setVisible(false);
                 login_form.setVisible(true);
                 forgot_form.setVisible(false);
