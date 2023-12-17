@@ -1,17 +1,17 @@
-*{
-    -fx-font-family: "Arial";
+* {
+    -fx-font-family: "Tahoma";
 }
 
-
-
-
-
-
-.left-form{
-    -fx-background-color:  #a1def5 
+.sidebar {
+    -fx-background-color: #141414;
+    -fx-background-radius: 0px 50px 0px 0px;
 
 }
 
+.sidebar-btn {
+    -fx-pref-width: 200px;
+
+}
 .modify-btn{
     -fx-cursor:hand;
     -fx-font-family: "Arial";
@@ -27,20 +27,6 @@
 
 }
 
-
-.white-bg{
-    -fx-background-color: #fff ;
-    -fx-border-radius: 10px;
-}
-
-.search{
-    -fx-font-family: "Arial";
-}
-
-.search:focus{
-    -fx-border-width: 1.8px;
-
-}
 
 
 

@@ -109,8 +109,6 @@ public class DebugController implements Initializable
             generateColumns(rsmd);
             int numberOfProps = rsmd.getColumnCount();
 
-            CustomModel protoModel = new CustomModel(numberOfProps);
-
             Task<Void> task = new Task<Void>() {
                 @Override protected Void call() throws Exception
                 {
@@ -119,6 +117,7 @@ public class DebugController implements Initializable
                         {
                             try
                             {
+                                CustomModel protoModel = new CustomModel(numberOfProps);
                                 while(rs.next())
                                 {
                                     CustomModel model = protoModel.clone();

@@ -27,9 +27,6 @@
                         <TableColumn fx:id="gv_luong" prefWidth="114.4000244140625" text="Lương " />
                         <TableColumn fx:id="gv_boMon" prefWidth="128.0" text="Bộ môn" />
                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
                   </TableView>
                   <Button layoutX="6.0" mnemonicParsing="false" onAction="#gv_insert" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm mới " />
                   <Button layoutX="280.0" mnemonicParsing="false" onAction="#gv_update" prefHeight="36.0" prefWidth="132.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Cập nhật" />

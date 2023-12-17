@@ -17,7 +17,7 @@
                <left>
                   <AnchorPane prefHeight="594.0" prefWidth="210.0" stylesheets="@Dashboard.css" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="-2.0" prefHeight="660.0" prefWidth="228.0" styleClass="left-form" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane layoutX="-2.0" prefHeight="660.0" prefWidth="228.0" styleClass="sidebar" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Label layoutX="79.0" layoutY="128.0" prefHeight="18.0" prefWidth="70.0" text="Welcome" textFill="#1b1a1a">
                                  <font>

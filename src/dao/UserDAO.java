@@ -79,4 +79,12 @@ public class UserDAO
         ResultSet resultSet = DBUtil.ExecuteQuery(query);
         return resultSet.next();
     }
+    // Kiểm tra câu trả lời có khớp với câu hỏi không
+    public boolean isAnswerValid(String username, String answer) throws SQLException
+    {
+        String query = "SELECT * FROM employee WHERE username='" + username 
+                        + "' AND answer='" + answer + "'";
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        return resultSet.next();
+    }
 }

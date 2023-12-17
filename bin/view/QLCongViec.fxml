@@ -62,9 +62,6 @@
                               <TableColumn fx:id="cv_ngayBD" prefWidth="101.5999755859375" text="Ngày bắt đầu" />
                               <TableColumn fx:id="cv_ngayKT" prefWidth="100.800048828125" text="Ngày kết thúc" />
                            </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                         </TableView>
                         <Button layoutX="6.0" mnemonicParsing="false" onAction="#cv_insert" prefHeight="36.0" prefWidth="123.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm CV" />
                         <Button layoutX="375.0" mnemonicParsing="false" onAction="#clearAll" prefHeight="36.0" prefWidth="123.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Clear All" />
@@ -107,9 +104,6 @@
                               <TableColumn fx:id="gv_phuCap" minWidth="0.0" prefWidth="86.39996337890625" text="Phụ cấp" />
                               <TableColumn fx:id="gv_ketQua" minWidth="0.0" prefWidth="86.39996337890625" text="Kết quả" />
                            </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
                         </TableView>
                         <Button mnemonicParsing="false" onAction="#gv_insert" prefHeight="36.0" prefWidth="123.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Thêm GV" />
                      </children>
