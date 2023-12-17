@@ -10,13 +10,13 @@
    <children>
       <AnchorPane layoutX="133.0" layoutY="77.0" prefHeight="585.0" prefWidth="846.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextArea fx:id="f_query" layoutX="22.0" layoutY="21.0" prefHeight="249.0" prefWidth="1070.0" promptText="Nhập câu truy vấn" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+            <TextArea fx:id="f_query" layoutX="22.0" layoutY="21.0" prefHeight="249.0" prefWidth="1070.0" promptText="Nhập câu truy vấn" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="10.0">
                <font>
                   <Font size="18.0" />
                </font>
             </TextArea>
-            <Button layoutX="396.0" layoutY="268.0" mnemonicParsing="false" onAction="#execute" prefHeight="36.0" prefWidth="297.0" styleClass="left-form-btn" stylesheets="@Dashboard.css" text="Execute" />
-            <TableView fx:id="tableView" layoutX="33.0" layoutY="305.0" prefHeight="324.0" prefWidth="1078.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="305.0" />
+            <Button layoutX="384.0" layoutY="269.0" mnemonicParsing="false" onAction="#execute" prefHeight="36.0" prefWidth="297.0" styleClass="add-btn" stylesheets="@Dashboard.css" text="Execute" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="408.4" />
+            <TableView fx:id="tableView" layoutX="33.0" layoutY="305.0" prefHeight="324.0" prefWidth="1078.0" stylesheets="@Dashboard.css" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="305.0" />
          </children>
       </AnchorPane>
    </children>
