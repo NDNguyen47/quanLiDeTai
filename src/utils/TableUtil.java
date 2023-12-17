@@ -8,14 +8,14 @@ public class TableUtil
     public static void autoResizeColumns(TableView<?> table)
     {
         table.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
-        table.getColumns().stream().forEach((column) -> {
-            Text t = new Text(column.getText());
+        table.getColumns().stream().forEach(col -> {
+            Text t = new Text(col.getText());
             double max = t.getLayoutBounds().getWidth();
             for(int i = 0; i < table.getItems().size(); i++)
             {
-                if(column.getCellData(i) != null)
+                if(col.getCellData(i) != null)
                 {
-                    t = new Text(column.getCellData(i).toString());
+                    t = new Text(col.getCellData(i).toString());
                     double calcWidth = t.getLayoutBounds().getWidth();
                     if(calcWidth > max)
                     {
@@ -23,7 +23,7 @@ public class TableUtil
                     }
                 }
             }
-            column.setPrefWidth(max + 50.0d);
+            col.setPrefWidth(max + 30.0d);
         });
     }
 }

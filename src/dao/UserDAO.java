@@ -8,17 +8,16 @@ import utils.DBUtil;
 
 public class UserDAO
 {
-    private static UserDAO instance;
     private UserDAO()
     {
     }
     public static UserDAO Instance()
     {
-        if(instance == null)
-        {
-            instance = new UserDAO();
-        }
-        return instance;
+        return SingletonHelper.INSTANCE;
+    }
+    private static class SingletonHelper
+    {
+        private static final UserDAO INSTANCE = new UserDAO();
     }
     // Thêm tài khoản
     public void insert(User user)
@@ -77,6 +76,14 @@ public class UserDAO
     public boolean isUsernameExist(String username) throws SQLException
     {
         String query = "SELECT * FROM employee WHERE username='" + username + "'";
+        ResultSet resultSet = DBUtil.ExecuteQuery(query);
+        return resultSet.next();
+    }
+    // Kiểm tra câu trả lời có khớp với câu hỏi không
+    public boolean isAnswerValid(String username, String answer) throws SQLException
+    {
+        String query = "SELECT * FROM employee WHERE username='" + username 
+                        + "' AND answer='" + answer + "'";
         ResultSet resultSet = DBUtil.ExecuteQuery(query);
         return resultSet.next();
     }

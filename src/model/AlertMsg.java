@@ -55,4 +55,9 @@ public class AlertMsg {
     {
         return alert.showAndWait();
     }
+
+    public Alert getAlert()
+    {
+        return alert;
+    }
 }
