@@ -39,7 +39,7 @@ public class UserDAO
     public void update(String username, String password)
     {
         String query = "UPDATE employee SET "
-                       + "password='" + password + "',"
+                       + "password='" + password + "' "
                        + "WHERE username='" + username + "'";
         
         try

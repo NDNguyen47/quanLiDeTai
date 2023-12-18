@@ -6,12 +6,17 @@ import dao.ThamGiaDTDAO;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,7 +44,7 @@ public class QLCongViecController implements Initializable
 
     @FXML private TableColumn<CongViec, String> cv_tenCV;
 
-    @FXML private TextField f_ketQua;
+    @FXML private ComboBox<String> f_ketQua;
 
     @FXML private TextField f_maDT;
 
@@ -72,6 +77,7 @@ public class QLCongViecController implements Initializable
     private AlertMsg alert;
     private CongViec selectedCV;
     private GiaoVienThamGiaDT selectedGV;
+    private List<String> ketQuaSelect = new ArrayList<>();
 
     public void showAllCV()
     {
@@ -113,11 +119,11 @@ public class QLCongViecController implements Initializable
     public void clearAllField()
     {
         f_maDT.setText("");
-        f_ketQua.setText("");
+        f_phuCap.setText("");
         f_maGV.setText("");
         f_ngayBD.setValue(null);
         f_ngayKT.setValue(null);
-        f_phuCap.setText("");
+        f_ketQua.getSelectionModel().clearSelection();
         f_tenCV.setText("");
         f_stt.setText("");
     }
@@ -311,7 +317,7 @@ public class QLCongViecController implements Initializable
         GiaoVienThamGiaDT gv = null;
         try
         {
-            if(f_maGV.getText().isEmpty() || f_phuCap.getText().isEmpty() || f_ketQua.getText().isEmpty())
+            if(f_maGV.getText().isEmpty() || f_ketQua.getSelectionModel() == null || f_phuCap.getText().isEmpty())
             {
                 alert = new AlertMsg();
                 alert.showAndWait();
@@ -332,8 +338,8 @@ public class QLCongViecController implements Initializable
                 gv.setMaGV(f_maGV.getText());
                 gv.setMaDT(selectedCV.getMaDT());
                 gv.setSTT(selectedCV.getSTT());
+                gv.setKetQua(f_ketQua.getSelectionModel().getSelectedItem());
                 gv.setPhuCap(f_phuCap.getText());
-                gv.setKetQua(f_ketQua.getText());
 
                 ThamGiaDTDAO.Instance().insert(gv);
                 alert = new AlertMsg(AlertType.INFORMATION, "Successfully Added");
@@ -357,7 +363,7 @@ public class QLCongViecController implements Initializable
         {
             f_maGV.setText(selectedGV.getMaGV());
             f_phuCap.setText(selectedGV.getPhuCap());
-            f_ketQua.setText(selectedGV.getKetQua());
+            f_ketQua.getSelectionModel().select(ketQuaSelect.indexOf(selectedGV.getKetQua()));
         }
         catch(Exception e)
         {
@@ -370,7 +376,7 @@ public class QLCongViecController implements Initializable
         GiaoVienThamGiaDT gv = null;
         try
         {
-            if(f_maGV.getText().isEmpty() || f_phuCap.getText().isEmpty() || f_ketQua.getText().isEmpty())
+            if(f_maGV.getText().isEmpty() || f_phuCap.getText().isEmpty() || f_ketQua.getSelectionModel() == null)
             {
                 alert = new AlertMsg();
                 alert.showAndWait();
@@ -392,7 +398,7 @@ public class QLCongViecController implements Initializable
                 gv.setMaDT(selectedCV.getMaDT());
                 gv.setSTT(selectedCV.getSTT());
                 gv.setPhuCap(f_phuCap.getText());
-                gv.setKetQua(f_ketQua.getText());
+                gv.setKetQua(f_ketQua.getSelectionModel().getSelectedItem());
 
                 ThamGiaDTDAO.Instance().update(gv);
                 alert = new AlertMsg(AlertType.INFORMATION, "Successfully Updated");
@@ -406,8 +412,17 @@ public class QLCongViecController implements Initializable
         }
     }
 
+    public void FDKetQua()
+    {
+        ketQuaSelect.add("Đạt");
+        ketQuaSelect.add("Không Đạt");
+        ObservableList<String> listData = FXCollections.observableArrayList(ketQuaSelect);
+        f_ketQua.setItems(listData);
+    }
+
     @Override public void initialize(URL arg0, ResourceBundle arg1)
     {
         showAllCV();
+        FDKetQua();
     }
 }

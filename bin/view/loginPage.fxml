@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginPageController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.loginPageController">
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
@@ -50,19 +50,18 @@
                         <Font name="Gadugi" size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="signup_email" layoutX="35.0" layoutY="157.0" prefHeight="30.0" prefWidth="302.0" promptText="Email Address" styleClass="textfield" stylesheets="@main.css" />
-                  <TextField fx:id="signup_username" layoutX="34.0" layoutY="197.0" prefHeight="30.0" prefWidth="302.0" promptText="Username" styleClass="textfield" stylesheets="@main.css" />
-                  <PasswordField fx:id="signup_password" layoutX="34.0" layoutY="240.0" prefHeight="30.0" prefWidth="302.0" promptText="Password" styleClass="textfield" stylesheets="@main.css" />
-                  <PasswordField fx:id="signup_cPassword" layoutX="34.0" layoutY="282.0" prefHeight="30.0" prefWidth="302.0" promptText="Comfirm Password" styleClass="textfield" stylesheets="@main.css" />
-                  <ComboBox fx:id="signup_selectQuestion" layoutX="35.0" layoutY="330.0" prefHeight="30.0" prefWidth="302.0" promptText="Select Question" />
-                  <TextField fx:id="signup_answer" layoutX="35.0" layoutY="376.0" prefHeight="30.0" prefWidth="302.0" promptText="Answer" styleClass="textfield" stylesheets="@main.css" />
-                  <Button fx:id="signup_btn" layoutX="35.0" layoutY="431.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="302.0" styleClass="btn" stylesheets="@main.css" text="Sign Up" textFill="WHITE" />
-                  <Label layoutX="138.0" layoutY="490.0" text="Sign In Account">
+                  <TextField fx:id="signup_username" layoutX="34.0" layoutY="154.0" prefHeight="30.0" prefWidth="302.0" promptText="Username" styleClass="textfield" stylesheets="@main.css" />
+                  <PasswordField fx:id="signup_password" layoutX="34.0" layoutY="197.0" prefHeight="30.0" prefWidth="302.0" promptText="Password" styleClass="textfield" stylesheets="@main.css" />
+                  <PasswordField fx:id="signup_cPassword" layoutX="34.0" layoutY="239.0" prefHeight="30.0" prefWidth="302.0" promptText="Comfirm Password" styleClass="textfield" stylesheets="@main.css" />
+                  <ComboBox fx:id="signup_selectQuestion" layoutX="35.0" layoutY="287.0" prefHeight="30.0" prefWidth="302.0" promptText="Select Question" />
+                  <TextField fx:id="signup_answer" layoutX="35.0" layoutY="333.0" prefHeight="30.0" prefWidth="302.0" promptText="Answer" styleClass="textfield" stylesheets="@main.css" />
+                  <Button fx:id="signup_btn" layoutX="35.0" layoutY="388.0" mnemonicParsing="false" onAction="#register" prefHeight="35.0" prefWidth="302.0" styleClass="btn" stylesheets="@main.css" text="Sign Up" textFill="WHITE" />
+                  <Label layoutX="138.0" layoutY="447.0" text="Sign In Account">
                      <font>
                         <Font name="Gill Sans MT" size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="signup_loginAccount" layoutX="56.0" layoutY="523.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="260.0" styleClass="btn" stylesheets="@main.css" text="Login Account" textFill="WHITE" />
+                  <Button fx:id="signup_loginAccount" layoutX="56.0" layoutY="480.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="30.0" prefWidth="260.0" styleClass="btn" stylesheets="@main.css" text="Login Account" textFill="WHITE" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="forgot_form" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="372.0" styleClass="white_bg" stylesheets="@main.css" visible="false">
