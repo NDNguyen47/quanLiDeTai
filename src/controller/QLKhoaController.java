@@ -4,7 +4,6 @@ import dao.BoMonDAO;
 import dao.KhoaDAO;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +19,7 @@ import javafx.scene.input.MouseEvent;
 import model.AlertMsg;
 import model.BoMon;
 import model.Khoa;
+import utils.DateUtil;
 import utils.TableUtil;
 
 
@@ -152,6 +152,9 @@ public class QLKhoaController implements Initializable
     {
         clearAllField();
         tableKhoa.getSelectionModel().clearSelection();
+        tableBM.getItems().clear();
+        selectedBoMon = null;
+        selectedKhoa = null;
     }
 
     @FXML void deleteBM(ActionEvent event)
@@ -282,7 +285,7 @@ public class QLKhoaController implements Initializable
                 KhoaDAO.Instance().insert(khoa);
                 alert = new AlertMsg(AlertType.INFORMATION, "Successfully Added!!");
                 showAllKhoa();
-                clearAllField();
+                clearAll();
             }
             alert.showAndWait();
         }
@@ -387,9 +390,7 @@ public class QLKhoaController implements Initializable
             f_bm_phong.setText(selectedBoMon.getPhong());
             f_bm_sdt.setText(selectedBoMon.getSdt());
             f_bm_trgBM.setText(selectedBoMon.getTruongBM());
-
-            LocalDate date = LocalDate.parse(selectedBoMon.getNgayNhanChuc());
-            f_bm_ngNC.setValue(date);
+            f_bm_ngNC.setValue(DateUtil.parseDate(selectedBoMon.getNgayNhanChuc()));
         }
         catch(Exception e)
         {
@@ -411,9 +412,7 @@ public class QLKhoaController implements Initializable
             f_khoa_phong.setText(selectedKhoa.getPhong());
             f_khoa_sdt.setText(selectedKhoa.getSdt());
             f_khoa_trgKh.setText(selectedKhoa.getTruongKhoa());
-
-            LocalDate date = LocalDate.parse(selectedKhoa.getNgayNhanChuc());
-            f_khoa_ngNC.setValue(date);
+            f_khoa_ngNC.setValue(DateUtil.parseDate(selectedKhoa.getNgayNhanChuc()));
             showKhoa_BM(selectedKhoa.getMaKhoa());
         }
         catch(Exception e)

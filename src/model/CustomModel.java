@@ -18,7 +18,8 @@ public class CustomModel implements Cloneable
             value--;
         }
     }
-
+    
+    @Override
     public CustomModel clone()
     {
         try
