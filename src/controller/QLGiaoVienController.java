@@ -4,7 +4,6 @@ import dao.DeTaiDAO;
 import dao.GiaoVienDAO;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,6 +24,7 @@ import model.AlertMsg;
 import model.DeTai;
 import model.GiaoVien;
 import model.SDT;
+import utils.DateUtil;
 import utils.TableUtil;
 
 
@@ -110,8 +110,7 @@ public class QLGiaoVienController implements Initializable
             f_gioiTinh.getSelectionModel().select(gioiTinhSelect.indexOf(selectedGV.getGioiTinh()));
             f_diaChi.setText(selectedGV.getDiaChi());
             f_boMon.setText(selectedGV.getMaBM());
-            LocalDate date = LocalDate.parse(selectedGV.getNgaySinh());
-            f_ngSinh.setValue(date);
+            f_ngSinh.setValue(DateUtil.parseDate(selectedGV.getNgaySinh()));
             f_luong.setText(selectedGV.getLuong());
             showSDT_GV(selectedGV.getMaGV());
             showDT_GV(selectedGV.getMaGV());

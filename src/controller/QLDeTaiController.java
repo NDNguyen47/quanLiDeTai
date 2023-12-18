@@ -4,7 +4,7 @@ import dao.ChuDeDAO;
 import dao.DeTaiDAO;
 import java.net.URL;
 import java.sql.Date;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import model.AlertMsg;
 import model.ChuDe;
 import model.DeTai;
+import utils.DateUtil;
 import utils.TableUtil;
 
 
@@ -276,7 +277,15 @@ public class QLDeTaiController implements Initializable
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            if(e instanceof SQLException)
+            {
+                alert = new AlertMsg(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+            else
+            {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -292,10 +301,8 @@ public class QLDeTaiController implements Initializable
             f_tenDT.setText(selectedDT.getTenDT());
             f_capQL.setText(selectedDT.getCapQL());
             f_kinhPhi.setText(selectedDT.getKinhPhi());
-            LocalDate ngayBD = LocalDate.parse(selectedDT.getNgayBD());
-            LocalDate ngayKT = LocalDate.parse(selectedDT.getNgayKT());
-            f_ngayBD.setValue(ngayBD);
-            f_ngayKT.setValue(ngayKT);
+            f_ngayBD.setValue(DateUtil.parseDate(selectedDT.getNgayBD()));
+            f_ngayKT.setValue(DateUtil.parseDate(selectedDT.getNgayKT()));
             for(ChuDe cd : tableCD.getItems())
             {
                 if(cd.getMaCD().equals(selectedDT.getMaCD()))
@@ -354,7 +361,15 @@ public class QLDeTaiController implements Initializable
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            if(e instanceof SQLException)
+            {
+                alert = new AlertMsg(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
+            }
+            else
+            {
+                e.printStackTrace();
+            }
         }
     }
 

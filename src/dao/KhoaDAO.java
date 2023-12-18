@@ -88,7 +88,7 @@ public class KhoaDAO implements DAO<Khoa>
         DBUtil.ExecuteUpdate(query);
     }
 
-    @Override public void delete(String... id)throws SQLException
+    @Override public void delete(String... id) throws SQLException
     {
         String query = "DELETE FROM khoa WHERE MAKHOA='" + id[0] + "'";
         DBUtil.ExecuteUpdate(query);
